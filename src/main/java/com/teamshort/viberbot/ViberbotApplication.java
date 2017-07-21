@@ -9,6 +9,5 @@ public class ViberbotApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ViberbotApplication.class, args);
-		//ss
 	}
 }
