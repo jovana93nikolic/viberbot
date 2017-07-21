@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Rooms</title>
+
+  
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(rooms)}">
+        <h2>Room List</h2>
+        
+         <p><a th:href="@{/room/new}">ADD NEW ROOM</a></p>
+        
+        
+        <table class="table table-striped">
+            <tr>
+                
+                <th>Name</th>
+                <th>Number</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+               
+            </tr>
+            <tr th:each="room : ${rooms}">
+               
+                <td th:text="${room.name}">Name</td>
+                <td th:text="${room.number}">Number</td>
+                <td><a th:href="${'/room/' + room.id}">View</a></td>
+                <td><a th:href="${'/room/edit/' + room.id}">Edit</a></td>
+                <td><a th:href="${'/room/delete/' + room.id}">Delete</a></td>
+            
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>
