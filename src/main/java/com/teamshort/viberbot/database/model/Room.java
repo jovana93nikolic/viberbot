@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Version;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "rooms")
@@ -36,10 +37,16 @@ public class Room implements Serializable {
 		endWorkTime (type: java.time.LocalTime)
 	 * */
 	
+	
+	
+	
 	@Column(name = "startWorkTime")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalTime startWorkTime;
  
+	
 	@Column(name = "endWorkTime")
+	@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
 	private LocalTime endWorkTime;
 
 	@Version
@@ -54,12 +61,12 @@ public class Room implements Serializable {
 		this.name = name;
 	}
 	
-	public Room(String number, String name, LocalTime startWork, LocalTime endWork) {
+	public Room(String number, String name, String startWork, String endWork) {
 		super();
 		this.number = number;
 		this.name = name;
-		this.startWorkTime = startWork;
-		this.endWorkTime = endWork;
+		this.startWorkTime = LocalTime.parse(startWork);
+		this.endWorkTime = LocalTime.parse(endWork);
 	}
 	
 	

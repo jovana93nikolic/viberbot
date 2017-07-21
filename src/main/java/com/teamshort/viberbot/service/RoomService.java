@@ -1,9 +1,9 @@
 package com.teamshort.viberbot.service;
 
-import java.util.List;
 
 import com.teamshort.viberbot.database.model.Room;
-import com.teamshort.viberbot.database.repository.RoomRepository;
+
+
 
 public interface RoomService {
 

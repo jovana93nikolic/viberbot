@@ -4,8 +4,13 @@
 <head lang="en">
 
     <title>Rooms</title>
-
-  
+	
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
 </head>
 <body>
 <div class="container">
@@ -17,24 +22,32 @@
         
         
         <table class="table table-striped">
+            <thead>
             <tr>
                 
                 <th>Name</th>
                 <th>Number</th>
+                <th>Start work time</th>
+                <th>End work time</th>
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
                
             </tr>
+            </thead>
             <tr th:each="room : ${rooms}">
-               
+            <body>
                 <td th:text="${room.name}">Name</td>
                 <td th:text="${room.number}">Number</td>
+                <td th:text="${room.startWorkTime}">StartWorkTime</td>
+                <td th:text="${room.endWorkTime}">EndWorkTime</td>
+          
                 <td><a th:href="${'/room/' + room.id}">View</a></td>
                 <td><a th:href="${'/room/edit/' + room.id}">Edit</a></td>
                 <td><a th:href="${'/room/delete/' + room.id}">Delete</a></td>
             
             </tr>
+            </body>
         </table>
 
     </div>
