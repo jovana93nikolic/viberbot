@@ -42,9 +42,6 @@ public class SpringEchoBot implements ApplicationListener<ApplicationReadyEvent>
     @Value("${application.viber-bot.webhook-url}")
     private String webhookUrl;
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringEchoBot.class, args);
-    }
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent appReadyEvent) {
@@ -68,27 +65,4 @@ public class SpringEchoBot implements ApplicationListener<ApplicationReadyEvent>
         return response != null ? CharStreams.toString(new InputStreamReader(response, Charsets.UTF_16)) : null;
     }
 
-    @Configuration
-    public class BotConfiguration {
-
-        @Value("${application.viber-bot.auth-token}")
-        private String authToken;
-
-        @Value("${application.viber-bot.name}")
-        private String name;
-
-        @Nullable
-        @Value("${application.viber-bot.avatar:@null}")
-        private String avatar;
-
-        @Bean
-        ViberBot viberBot() {
-            return new ViberBot(new BotProfile(name, avatar), authToken);
-        }
-
-        @Bean
-        ViberSignatureValidator signatureValidator() {
-            return new ViberSignatureValidator(authToken);
-        }
-    }
 }
