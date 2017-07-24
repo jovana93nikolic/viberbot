@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.teamshort.viberbot.database.model.Room;
+import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.repository.RoomRepository;
 import com.teamshort.viberbot.service.RoomService;
 import com.teamshort.viberbot.service.RoomServiceImpl;
@@ -19,12 +19,8 @@ import com.teamshort.viberbot.service.RoomServiceImpl;
 @Controller
 public class RoomController {
 	
+	@Autowired
 	 private RoomService roomService;
-
-	    @Autowired
-	    public void setRoomService(RoomService roomService) {
-	        this.roomService = roomService;
-	    }
 
 	    @RequestMapping(value = "/room/rooms", method = RequestMethod.GET)
 	    public String list(Model model){
@@ -53,7 +49,7 @@ public class RoomController {
 	    @RequestMapping(value = "room", method = RequestMethod.POST)
 	    public String saveRoom(Room room){
 	        roomService.saveRoom(room);
-	        return "redirect:/room/" + room.getId();
+	        return "redirect:/rooms";
 	    }
 
 	    @RequestMapping("room/delete/{id}")

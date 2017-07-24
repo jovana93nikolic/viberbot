@@ -6,4 +6,6 @@ import com.teamshort.viberbot.database.entity.User;
 
 public interface UserRepository extends CrudRepository<User, Long>{
 
+	public User findByViberId(String viberId);
+
 }

@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.teamshort.viberbot.database.model.Room;
-
 
 
 /*
@@ -35,7 +33,7 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private long id;
+	private Long id;
 	
 	@Column(name = "room")
 	private Room room;
@@ -52,7 +50,7 @@ public class Reservation {
 	
 	
 	
-	public Reservation(long id, Room room, String date, String time) {
+	public Reservation(Long id, Room room, String date, String time) {
 		super();
 		this.id = id;
 		//this.user = user;
@@ -64,11 +62,11 @@ public class Reservation {
 
 
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

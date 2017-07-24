@@ -1,4 +1,4 @@
-package com.teamshort.viberbot.database.model;
+package com.teamshort.viberbot.database.entity;
 
 import java.io.Serializable;
 import java.time.LocalTime;
