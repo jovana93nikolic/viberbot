@@ -26,28 +26,28 @@ public class RoomController {
 	        this.roomService = roomService;
 	    }
 
-	    @RequestMapping(value = "/rooms", method = RequestMethod.GET)
+	    @RequestMapping(value = "/room/rooms", method = RequestMethod.GET)
 	    public String list(Model model){
 	        model.addAttribute("rooms", roomService.listAllRooms());
-	        return "rooms";
+	        return "room/rooms";
 	    }
 
 	    @RequestMapping("room/{id}")
 	    public String showRoom(@PathVariable Long id, Model model){
 	        model.addAttribute("room", roomService.getRoomById(id));
-	        return "roomshow";
+	        return "room/roomshow";
 	    }
 
 	    @RequestMapping("room/edit/{id}")
 	    public String edit(@PathVariable Long id, Model model){
 	        model.addAttribute("room", roomService.getRoomById(id));
-	        return "roomform";
+	        return "room/roomform";
 	    }
 
 	    @RequestMapping("room/new")
 	    public String newRoom(Model model){
 	        model.addAttribute("room", new Room());
-	        return "roomform";
+	        return "room/roomform";
 	    }
 
 	    @RequestMapping(value = "room", method = RequestMethod.POST)
@@ -59,7 +59,7 @@ public class RoomController {
 	    @RequestMapping("room/delete/{id}")
 	    public String delete(@PathVariable Long id){
 	        roomService.deleteRoom(id);
-	        return "redirect:/rooms";
+	        return "redirect:/room/rooms";
 	    }
 
 	
