@@ -9,6 +9,8 @@ import com.viber.bot.ViberSignatureValidator;
 import com.viber.bot.api.ViberBot;
 import com.viber.bot.message.TextMessage;
 import com.viber.bot.profile.BotProfile;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +31,9 @@ import java.io.InputStreamReader;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
+
+import com.teamshort.viberbot.service.ViberBotService;
+
 @RestController
 //@SpringBootApplication
 public class SpringEchoBot implements ApplicationListener<ApplicationReadyEvent> {
@@ -42,6 +47,8 @@ public class SpringEchoBot implements ApplicationListener<ApplicationReadyEvent>
     @Value("${application.viber-bot.webhook-url}")
     private String webhookUrl;
 
+    @Autowired
+    private ViberBotService viberBotService;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent appReadyEvent) {
@@ -51,9 +58,15 @@ public class SpringEchoBot implements ApplicationListener<ApplicationReadyEvent>
             e.printStackTrace();
         }
 
-        bot.onMessageReceived((event, message, response) -> response.send(message)); // echos everything back
-        bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of( // send 'Hi UserName' when conversation is started
-                new TextMessage("Hi " + event.getUser().getName()))));
+        //bot.onMessageReceived((event, message, response) -> response.send(message)); // echos everything back
+        //bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of( // send 'Hi UserName' when conversation is started
+          //      new TextMessage("Hi " + event.getUser().getName()))));
+        
+        viberBotService.onMessageReceived(bot);
+        viberBotService.subscribe(bot);
+        viberBotService.unsubscribe(bot);
+        viberBotService.onConversationStarted(bot);
+    
     }
 
     @PostMapping(value = "/", produces = "application/json")
@@ -65,4 +78,7 @@ public class SpringEchoBot implements ApplicationListener<ApplicationReadyEvent>
         return response != null ? CharStreams.toString(new InputStreamReader(response, Charsets.UTF_16)) : null;
     }
 
+    
+    
+    
 }

@@ -24,6 +24,7 @@ public class BotConfiguration {
     @Value("${application.viber-bot.avatar:@null}")
     private String avatar;
 
+    
     @Bean
     ViberBot viberBot() {
         return new ViberBot(new BotProfile(name, avatar), authToken);

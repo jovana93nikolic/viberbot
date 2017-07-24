@@ -49,7 +49,7 @@ public class RoomController {
 	    @RequestMapping(value = "room", method = RequestMethod.POST)
 	    public String saveRoom(Room room){
 	        roomService.saveRoom(room);
-	        return "redirect:/rooms";
+	        return "redirect:/room/rooms";
 	    }
 
 	    @RequestMapping("room/delete/{id}")
