@@ -13,6 +13,7 @@ onMessageReceived
 These functions should be used for Viber bot events manipulations*/
 
 
+
 public interface ViberBotService {
 
 	void onMessageReceived(ViberBot bot);
