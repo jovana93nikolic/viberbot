@@ -5,10 +5,13 @@ import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -36,13 +39,13 @@ public class Reservation {
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToMany
+//	@OneToMany(mappedBy = "rooms", fetch = FetchType.LAZY)
 	@Column(name = "room")
 	private Room room;
 	
-	@ManyToMany
+/*	@OneToMany
 	@Column(name = "user")
-	private User user;
+	private User user;*/
 	
 	
 	@Column(name = "date")
@@ -57,10 +60,10 @@ public class Reservation {
 	
 	
 	
-	public Reservation(Long id, Room room, User user, String date, String time) {
+	public Reservation(Long id, Room room,  String date, String time) {
 		super();
 		this.id = id;
-		this.user = user;
+		//this.user = user;
 		this.room = room;
 		this.date = LocalDate.parse(date);
 		this.time = LocalTime.parse(time);
@@ -76,14 +79,14 @@ public class Reservation {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+	/*
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
+	}*/
 
 	public Room getRoom() {
 		return room;
@@ -114,7 +117,7 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [id=" + id + ", room=" + room.getName() + " , user=" + user.getViberId()  + ", date=" + date + ", time=" + time
+		return "Reservation [id=" + id + ", room=" + room.getName() + " , user="   + ", date=" + date + ", time=" + time
 				+ "]";
 	}
 	
