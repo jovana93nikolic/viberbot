@@ -5,7 +5,9 @@ import com.viber.bot.Response;
 import com.viber.bot.ViberSignatureValidator;
 import com.viber.bot.api.ViberBot;
 import com.viber.bot.event.callback.OnSubscribe;
+import com.viber.bot.event.callback.OnUnsubscribe;
 import com.viber.bot.event.incoming.IncomingSubscribedEvent;
+import com.viber.bot.event.incoming.IncomingUnsubscribeEvent;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,8 +76,20 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 	@Override
 	public void unsubscribe(ViberBot bot) {
-		// TODO Auto-generated method stub
-		//userService.unsubscribe(viberId);
+		bot.onUnsubscribe((new OnUnsubscribe() {
+
+			@Override
+			public void unsubscribe(IncomingUnsubscribeEvent event) {
+
+				String userViberId = event.getUserId();
+				userService.unsubscribe(userViberId);
+				
+			}
+			
+		}));
+		
+		
+		
 	}
 
     @Override
