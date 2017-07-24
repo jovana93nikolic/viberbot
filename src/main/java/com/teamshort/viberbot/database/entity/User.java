@@ -33,12 +33,10 @@ public class User {
 	
 	public User() {}
 	
+
 	
-	
-	
-	public User(Long id, String viberId, String name, boolean subscribe) {
+	public User(String viberId, String name, boolean subscribe) {
 		super();
-		this.id = id;
 		this.viberId = viberId;
 		this.name = name;
 		this.subscribe = subscribe;
