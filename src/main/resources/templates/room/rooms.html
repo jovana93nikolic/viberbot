@@ -36,7 +36,7 @@
             </tr>
             </thead>
             <tr th:each="room : ${rooms}">
-            <body>
+
                 <td th:text="${room.name}">Name</td>
                 <td th:text="${room.number}">Number</td>
                 <td th:text="${room.startWorkTime}">StartWorkTime</td>
@@ -47,7 +47,6 @@
                 <td><a th:href="${'/room/delete/' + room.id}">Delete</a></td>
             
             </tr>
-            </body>
         </table>
 
     </div>

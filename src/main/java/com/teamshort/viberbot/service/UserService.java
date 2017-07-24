@@ -27,5 +27,6 @@ public interface UserService {
     void unsubscribe(String viberId);
 
     void deleteUser(Long id);
+
 	
 }

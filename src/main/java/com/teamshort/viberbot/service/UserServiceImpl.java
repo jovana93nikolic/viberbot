@@ -48,4 +48,6 @@ public class UserServiceImpl implements UserService {
 			userRepository.findByViberId(viberId).setSubscribe(false);
 		}
 
+
+
 }
