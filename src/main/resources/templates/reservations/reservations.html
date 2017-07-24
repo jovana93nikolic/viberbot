@@ -14,25 +14,32 @@
 <body>
 	<div class="container">
 		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-		<div th:if="${not #lists.isEmpty(users)}">
-			<h1>Users</h1>
+		<div th:if="${not #lists.isEmpty(reservations)}">
+			<h1>Reservations</h1>
 			
 			<table class="table table-striped">
 				<thead>
 					<tr>
 
-						<th>Viber ID</th>
-						<th>Name</th>
-						<th>Subscribed</th>
+						<th>Date</th>
+						<th>Time</th>
+						<th>User</th>
+						<th>Room</th>
+						
+						<th>Reserve</th>
+						<th>Edit</th>
 						<th>Delete</th>
 
 					</tr>
 				</thead>
-				<tr th:each="user : ${users}">
-					<td th:text="${user.viberId}">ViberID</td>
-					<td th:text="${user.name}">Name</td>
-					<td th:text="${user.subscribe}">subs</td>
-					<td><a th:href="${'/user/delete/' + user.id}">Delete</a></td>
+				<tr th:each="reservation : ${reservations}">
+					<td th:text="${reservation.date}">Date</td>
+					<td th:text="${reservation.time}">Time</td>
+					<td th:text="${reservation.user}">User</td>
+					<td th:text="${reservation.room}">Room</td>
+					
+					<td><a th:href="${'/reservation/reserve/' + reservation.id}">Reserve</a></td>
+					<td><a th:href="${'/reservation/delete/' + reservation.id}">Delete</a></td>
 				</tr>
 			</table>	
 		</div>
