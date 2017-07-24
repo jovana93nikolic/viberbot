@@ -1,4 +1,4 @@
-package com.teamshort.viberbot.service;
+package com.teamshort.viberbot.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +45,14 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public void unsubscribe(@RequestParam("viberId") String viberId) {
-			userRepository.findByViberId(viberId).setSubscribe(false);
+			
+			User user= userRepository.findByViberId(viberId);
+			
+			user.setSubscribe(false);
+			
+			//userRepository.save(user);
+			add(user);
+			
 		}
 
 

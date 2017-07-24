@@ -1,4 +1,4 @@
-package com.teamshort.viberbot.service;
+package com.teamshort.viberbot.service.reservation;
 
 import java.time.LocalDate;
 
@@ -25,9 +25,11 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public Reservation edit(Reservation reservation) {
-		//to do
-		return null;
+	public void edit(Reservation reservation) {
+		Reservation res = reservation;
+		//do manipulation
+		reserve(res); //??
+	
 	}
 
 	@Override
@@ -38,12 +40,18 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public String getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date) {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 
 	@Override
 	public String getByUser(String viberId) {
 		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 	
