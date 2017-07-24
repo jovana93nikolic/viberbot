@@ -164,24 +164,16 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", button12);
-    	keyboard.put("DefaultHeight", "regular");
+    	keyboard.put("DefaultHeight", true);
 //    	keyboard.put("BgColor", "#FFFFFF");
     	keyboard.put("Type", "keyboard");
     	
     	System.out.println("AFTER KEYBOARD HASMAP IS CREATED");
     	
     	
-    	bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of
-    	(new TextMessage("Hello,  " 
-    	+ event.getUser().getName()
-    	+ "! Welcome to ViberBot Room Reservation. KEYBOARD TEST!!!" 
-    	, new MessageKeyboard(keyboard), null, new Integer(1)	
-    	)
-    			
-    			)
-    			)
-    			
-    			); 				
+		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
+				"Hello,  " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. KEYBOARD TEST!!!",
+				new MessageKeyboard(keyboard), null, new Integer(1)))));				
     	System.out.println(keyboard.toString());
     	System.out.println("AFTER on conversation call");
 
