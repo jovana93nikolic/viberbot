@@ -66,7 +66,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 	public void onConversationStarted(ViberBot bot) {
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of( // send 'Hi UserName' when conversation
 																				// is started
-				new TextMessage("Hello  ,  " + event.getUser().getName()))));
+				new TextMessage("Hello  ,  " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation" ) )));
 	}
 
 }
