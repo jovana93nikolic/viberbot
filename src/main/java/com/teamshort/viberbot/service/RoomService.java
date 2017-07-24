@@ -1,7 +1,7 @@
 package com.teamshort.viberbot.service;
 
 
-import com.teamshort.viberbot.database.model.Room;
+import com.teamshort.viberbot.database.entity.Room;
 
 
 

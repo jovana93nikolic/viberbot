@@ -18,7 +18,13 @@ public interface UserService {
 	Iterable<User> findAll();
 
 
-    User saveUser(User user);
+    User add(User user);
+    
+    User getByViberId(String viberId);
+    
+    void subscribe(String viberId);
+    
+    void unsubscribe(String viberId);
 
     void deleteUser(Long id);
 	
