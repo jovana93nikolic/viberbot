@@ -156,11 +156,11 @@ public class ViberBotServiceImpl implements ViberBotService {
     	Map<String, Object> buttons  = new HashMap<>();
     	buttons.put("Buttons", button12);
     	
-    	Map<String, Object> height  = new HashMap<>();
-    	height.put("DefaultHeight", "regular");
+    //	Map<String, Object> height  = new HashMap<>();
+    	//height.put("DefaultHeight", "regular");
     	
-    	Map<String, Object> col  = new HashMap<>();
-    	col.put("BgColor", "#FFFFFF");
+    	//Map<String, Object> col  = new HashMap<>();
+    	//col.put("BgColor", "#FFFFFF");
     	
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", button12);
@@ -175,19 +175,16 @@ public class ViberBotServiceImpl implements ViberBotService {
     	(new TextMessage("Hello,  " 
     	+ event.getUser().getName()
     	+ "! Welcome to ViberBot Room Reservation. KEYBOARD TEST!!!" 
-    	, new MessageKeyboard(keyboard), null, new Integer(1)
-    	
-
-    	
-    	
+    	, new MessageKeyboard(keyboard), null, new Integer(1)	
     	)
     			
-    			
-    			))
+    			)
+    			)
     			
     			); 				
-	
-		
+    	System.out.println(keyboard.toString());
+    	System.out.println("AFTER on conversation call");
+
 	}
 
 
