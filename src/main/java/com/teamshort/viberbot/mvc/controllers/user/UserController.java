@@ -26,7 +26,11 @@ public class UserController {
 	        model.addAttribute("users", userService.findAll());
 	        return "user/users";
 	    }
-	    
+	    @RequestMapping("user/delete/{id}")
+	    public String delete(@PathVariable Long id){
+	        userService.deleteUser(id);
+	        return "redirect:/user/users";
+	    }   
 //		@RequestMapping("/saveusers")
 	//	public String process(){
 	//		userService.add(new User("randomid","namename",true));			
