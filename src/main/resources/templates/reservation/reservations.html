@@ -39,6 +39,7 @@
 					<td th:text="${reservation.room}">Room</td>
 					
 					<td><a th:href="${'/reservation/reserve/' + reservation.id}">Reserve</a></td>
+					<td><a th:href="${'/reservation/edit/' + reservation.id}">Edit</a></td>
 					<td><a th:href="${'/reservation/delete/' + reservation.id}">Delete</a></td>
 				</tr>
 			</table>	
