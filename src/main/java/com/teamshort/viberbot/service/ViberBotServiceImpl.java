@@ -188,9 +188,9 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	
     	bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of
-    	(new TextMessage("Hello  ,  " 
+    	(new TextMessage("Hello,  " 
     	+ event.getUser().getName()
-    	+ "! Welcome to ViberBot Room Reservation" 
+    	+ "! Welcome to ViberBot Room Reservation. KEYBOARD TEST!!!" 
     	, new MessageKeyboard(keyboard), null, new Integer(1)
     	
     	
@@ -201,9 +201,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 			
     
 
-		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of( // send 'Hi UserName' when conversation
-																				// is started
-				new TextMessage("Hello  ,  " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation" ) )));
+		
 	}
 
 
