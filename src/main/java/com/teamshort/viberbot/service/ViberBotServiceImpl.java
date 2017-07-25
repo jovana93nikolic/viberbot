@@ -136,7 +136,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	//button2.put("Type", "keyboard");
     	button2.put("Columns", "3");
     	button2.put("Rows", "2");
-    	button2.put("BgColor", "#ffb6c1");
+    	button2.put("BgColor", "#c6e2ff");
 //    	button2.put("BgMediaType", "picture");
 //    	button2.put("BgMedia", "http://www.url.by/test.gif");
 //    	button2.put("BgLoop", "true");
@@ -175,7 +175,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	keyboard.put("Type", "keyboard");
     	
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
-				"Hello,  " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. KEYBOARD TEST!!!",
+				"Hello, " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. Please choose one of the options below:",
 				new MessageKeyboard(keyboard), null, new Integer(1)))));				
 
 	}
