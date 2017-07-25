@@ -100,30 +100,6 @@ public class ViberBotServiceImpl implements ViberBotService {
 		
 	}
 	
-	
-	/*String keyboardMessageStr = {
-	"keyboard": {
-	"DefaultHeight": true,
-	"BgColor": "#FFFFFF",
-	"Buttons": [{
-	"Columns": 6,
-	"Rows": 1,
-	"BgColor": "#2db9b9",
-	"BgMediaType": "gif",
-	"BgMedia": "http://www.url.by/test.gif",
-	"BgLoop": true,
-	"ActionType": "open-url",
-	"ActionBody": "www.tut.by",
-	"Image": "www.tut.by/img.jpg",
-	"Text": "Key text",
-	"TextVAlign": "middle",
-	"TextHAlign": "center",
-	"TextOpacity": 60,
-	"TextSize": "regular"
-	}]
-	}
-	}*/
-	
 
     @Override
 	public void onConversationStarted(ViberBot bot) {
@@ -136,41 +112,46 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> button1  = new HashMap<>();
     	//button1.put("Type", "keyboard");
-    	button1.put("Columns", "2");
-    	button1.put("Rows", "1");
-    	button1.put("BgColor", "#2db9b9");
-    	button1.put("BgMediaType", "picture");
-    	button1.put("BgMedia", "http://www.url.by/test.gif");
-    	button1.put("BgLoop", "true");
-    	button1.put("ActionType", "open-url");
-    	button1.put("ActionBody", "www.tut.by");
-    	button1.put("Image", "www.tut.by/img.jpg");
-    	button1.put("Text", "Prvi button");
-    	button1.put("TextVAlign", "middle");
-    	button1.put("TextHAlign", "center");
-    	button1.put("TextOpacity", "60");
-    	button1.put("TextSize", "regular");
+//    	button1.put("Columns", "2");
+//    	button1.put("Rows", "1");
+//    	button1.put("BgColor", "#2db9b9");
+//    	button1.put("BgMediaType", "picture");
+//    	button1.put("BgMedia", "http://www.url.by/test.gif");
+//    	button1.put("BgLoop", "true");
+//    	button1.put("ActionType", "open-url");
+//    	button1.put("ActionBody", "www.tut.by");
+//    	button1.put("Image", "www.tut.by/img.jpg");
+//    	button1.put("Text", "Prvi button");
+//    	button1.put("TextVAlign", "middle");
+//    	button1.put("TextHAlign", "center");
+//    	button1.put("TextOpacity", "60");
+//    	button1.put("TextSize", "regular");
+//    	
+//    	Map<String, Object> button2  = new HashMap<>();
+//    	//button2.put("Type", "keyboard");
+//    	button2.put("Columns", "2");
+//    	button2.put("Rows", "1");
+//    	button2.put("BgColor", "#2db9b9");
+//    	button2.put("BgMediaType", "picture");
+//    	button2.put("BgMedia", "http://www.url.by/test.gif");
+//    	button2.put("BgLoop", "true");
+//    	button2.put("ActionType", "open-url");
+//    	button2.put("ActionBody", "www.tut.by");
+//    	button2.put("Image", "www.tut.by/img.jpg");
+//    	button2.put("Text", "Prvi button");
+//    	button2.put("TextVAlign", "middle");
+//    	button2.put("TextHAlign", "center");
+//    	button2.put("TextOpacity", "60");
+//    	button2.put("TextSize", "regular");
     	
-    	Map<String, Object> button2  = new HashMap<>();
-    	//button2.put("Type", "keyboard");
-    	button2.put("Columns", "2");
-    	button2.put("Rows", "1");
-    	button2.put("BgColor", "#2db9b9");
-    	button2.put("BgMediaType", "picture");
-    	button2.put("BgMedia", "http://www.url.by/test.gif");
-    	button2.put("BgLoop", "true");
-    	button2.put("ActionType", "open-url");
-    	button2.put("ActionBody", "www.tut.by");
-    	button2.put("Image", "www.tut.by/img.jpg");
-    	button2.put("Text", "Prvi button");
-    	button2.put("TextVAlign", "middle");
-    	button2.put("TextHAlign", "center");
-    	button2.put("TextOpacity", "60");
-    	button2.put("TextSize", "regular");
+    	button1.put("ActionType", "reply");
+    	button1.put("ActionBody", "reply to PA");
+    	button1.put("Text", "Test");
+    	button1.put("TextSize", "regular");
     	
     	ArrayList<Map> button12  = new ArrayList<>();
     	button12.add(button1);
-    	button12.add(button2);
+//    	button12.add(button2);
     	
     	Map<String, Object> buttons  = new HashMap<>();
     	buttons.put("Buttons", button12);
@@ -184,7 +165,10 @@ public class ViberBotServiceImpl implements ViberBotService {
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", button12);
     	keyboard.put("DefaultHeight", "regular");
-    	keyboard.put("BgColor", "#FFFFFF");
+//    	keyboard.put("BgColor", "#FFFFFF");
+    	keyboard.put("Type", "keyboard");
+    	
+    	System.out.println("AFTER KEYBOARD HASMAP IS CREATED");
     	
     	
     	bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of
@@ -193,14 +177,16 @@ public class ViberBotServiceImpl implements ViberBotService {
     	+ "! Welcome to ViberBot Room Reservation. KEYBOARD TEST!!!" 
     	, new MessageKeyboard(keyboard), null, new Integer(1)
     	
-    	
-    	
-    	)))); 				
-				
-		
-			
-    
 
+    	
+    	
+    	)
+    			
+    			
+    			))
+    			
+    			); 				
+	
 		
 	}
 
