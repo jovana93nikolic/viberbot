@@ -43,10 +43,6 @@ import com.viber.bot.profile.UserProfile;
 
 import aj.org.objectweb.asm.TypeReference;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 @Service
 public class ViberBotServiceImpl implements ViberBotService {
 
