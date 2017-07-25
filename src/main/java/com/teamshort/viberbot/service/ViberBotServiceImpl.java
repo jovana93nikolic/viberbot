@@ -61,7 +61,6 @@ public class ViberBotServiceImpl implements ViberBotService {
     @Override
 	public void onMessageReceived(ViberBot bot) {
 
-		bot.onMessageReceived((event,message,response) -> response.send("Welcome"));
 		
 		bot.onMessageReceived(new OnMessageReceived(){
 			
