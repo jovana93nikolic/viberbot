@@ -99,3 +99,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 				new TextMessage("Hello  ,  " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation" ) )));
 	}
 }
+
+
+
+
+
+

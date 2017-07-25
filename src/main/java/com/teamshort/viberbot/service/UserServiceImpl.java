@@ -45,7 +45,14 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public void unsubscribe(@RequestParam("viberId") String viberId) {
-			userRepository.findByViberId(viberId).setSubscribe(false);
+			
+			User user= userRepository.findByViberId(viberId);
+			
+			user.setSubscribe(false);
+			
+			//userRepository.save(user);
+			add(user);
+			
 		}
 
 
