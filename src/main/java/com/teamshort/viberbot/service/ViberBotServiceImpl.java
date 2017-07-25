@@ -157,7 +157,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	ArrayList<Map> button12  = new ArrayList<>();
     	button12.add(button1);
-//    	button12.add(button2);
+    	button12.add(button2);
     	
     	Map<String, Object> buttons  = new HashMap<>();
     	buttons.put("Buttons", button12);
