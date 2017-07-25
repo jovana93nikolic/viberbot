@@ -39,6 +39,7 @@ import com.viber.bot.message.MessageKeyboard;
 //import com.teamshort.viberbot.message.MessageKeyboard;
 import com.teamshort.viberbot.service.user.UserService;
 import com.viber.bot.message.TextMessage;
+import com.viber.bot.message.TrackingData;
 import com.viber.bot.profile.UserProfile;
 
 import aj.org.objectweb.asm.TypeReference;
@@ -174,9 +175,21 @@ public class ViberBotServiceImpl implements ViberBotService {
 //    	keyboard.put("BgColor", "#FFFFFF");
     	keyboard.put("Type", "keyboard");
     	
+    	
+    	TrackingData welcomeTrackingData = new TrackingData();
+
+    	
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
 				"Hello, " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. Please choose one of the options below:",
-				new MessageKeyboard(keyboard), null, new Integer(1)))));				
+				new MessageKeyboard(keyboard), null, new Integer(1)))));	
+		
+		
+
+		System.out.println("TrackingData:");
+			System.out.println(welcomeTrackingData.toString());
+		
+
+
 
 	}
 
