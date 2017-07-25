@@ -4,8 +4,10 @@ import com.viber.bot.Request;
 import com.viber.bot.Response;
 import com.viber.bot.ViberSignatureValidator;
 import com.viber.bot.api.ViberBot;
+import com.viber.bot.event.callback.OnMessageReceived;
 import com.viber.bot.event.callback.OnSubscribe;
 import com.viber.bot.event.callback.OnUnsubscribe;
+import com.viber.bot.event.incoming.IncomingMessageEvent;
 import com.viber.bot.event.incoming.IncomingSubscribedEvent;
 import com.viber.bot.event.incoming.IncomingUnsubscribeEvent;
 
@@ -18,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
@@ -35,6 +38,7 @@ import com.google.common.collect.Maps;
 import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.Futures;
 import com.teamshort.viberbot.database.entity.User;
+import com.viber.bot.message.Message;
 import com.viber.bot.message.MessageKeyboard;
 //import com.teamshort.viberbot.message.MessageKeyboard;
 import com.teamshort.viberbot.service.user.UserService;
@@ -57,7 +61,32 @@ public class ViberBotServiceImpl implements ViberBotService {
     @Override
 	public void onMessageReceived(ViberBot bot) {
 
-		bot.onMessageReceived((event, message, response) -> response.send("Welcome to our public account!"));
+		bot.onMessageReceived((event,message,response) -> response.send("Welcome"));
+		
+		bot.onMessageReceived(new OnMessageReceived(){
+			
+			@Override
+			public void messageReceived(IncomingMessageEvent event, Message message, Response response) {
+				
+				
+				
+				if(message.getTrackingData().get("welcome").equals("welcomeObj")){
+				
+					if(message.getMapRepresentation().equals("Reserve room"))
+						response.send("You want to reserve a room!");
+					else if(message.getMapRepresentation().equals("See previous reservations"))
+						response.send("You want to see previous reservations!");
+					
+					
+				}
+				
+			}
+			
+			
+		});
+		
+		
+		
 	}
     
 	@Override
@@ -177,6 +206,8 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	
     	TrackingData welcomeTrackingData = new TrackingData();
+    	welcomeTrackingData.put("welcome", "welcomeObj");
+    	
 
     	
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
