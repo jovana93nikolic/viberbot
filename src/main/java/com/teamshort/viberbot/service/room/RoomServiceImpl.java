@@ -1,4 +1,4 @@
-package com.teamshort.viberbot.service;
+package com.teamshort.viberbot.service.room;
 
 import java.util.ArrayList;
 import java.util.List;

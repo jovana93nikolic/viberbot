@@ -37,6 +37,7 @@ import com.google.common.util.concurrent.Futures;
 import com.teamshort.viberbot.database.entity.User;
 import com.viber.bot.message.MessageKeyboard;
 //import com.teamshort.viberbot.message.MessageKeyboard;
+import com.teamshort.viberbot.service.user.UserService;
 import com.viber.bot.message.TextMessage;
 import com.viber.bot.profile.UserProfile;
 
@@ -127,62 +128,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 	}
 	}*/
 	
-	
-	public final static String JSON_DATA =
-		     "{" 
-		   + "  \"Type\":\"keyboard\":"
-		   + "	\"DefaultHeight\":\"true\"," 
-		   + "	\"BgColor\":\"#FFFFFF\"," 
-		   + "  \"Buttons\": ["
-		   + "    {" 
-		   + "      \"Columns\": \"3\"," 
-		   + "      \"Rows\": \"2\","                  
-		   + "      \"BgColor\" : \"#2db9b9\"," 
-		   + "      \"BgMediaType\" : \"picture\"," 
-		   + "      \"BgMedia\" : \"http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg\"," 
-		   + "      \"BgLoop\": \"true\"," 
-		   + "      \"ActionType\": \"reply\"," 
-		   + "      \"ActionBody\": \"Yes\"," 
-		   //+ "      \"Image\" : \"www.tut.by/img.jpg\"," 
-		   //+ "      \"Text\" : \"Key text\"," 
-		   //+ "      \"TextVAlign\" : \"middle\","
-		   //+ "      \"TextHAlign\" : \"center\","
-		   //+ "      \"TextOpacity\" : \"60\","
-		   //+ "      \"TextSize\" : \"regular\""
-		   + "    }" 
-		   + "  ]" 
-		   + "}";
 
     @Override
 	public void onConversationStarted(ViberBot bot) {
+
     	
 		//bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of
     	//(/*new TextMessage("Hello  ,  " + event.getUser().getName() + 
     	//"! Welcome to ViberBot Room Reservation" )*/)));
     	
-    	String s =  "{" 
-    			   + "  \"Type\":\"keyboard\":"
-    			   + "	\"DefaultHeight\":\"true\"," 
-    			   + "	\"BgColor\":\"#FFFFFF\"," 
-    			   + "  \"Buttons\": ["
-    			   + "    {" 
-    			   + "      \"Columns\": \"3\"," 
-    			   + "      \"Rows\": \"2\","                  
-    			   + "      \"BgColor\" : \"#2db9b9\"," 
-    			   + "      \"BgMediaType\" : \"picture\"," 
-    			   + "      \"BgMedia\" : \"http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg\"," 
-    			   + "      \"BgLoop\": \"true\"," 
-    			   + "      \"ActionType\": \"reply\"," 
-    			   + "      \"ActionBody\": \"Yes\"," 
-    			   //+ "      \"Image\" : \"www.tut.by/img.jpg\"," 
-    			   //+ "      \"Text\" : \"Key text\"," 
-    			   //+ "      \"TextVAlign\" : \"middle\","
-    			   //+ "      \"TextHAlign\" : \"center\","
-    			   //+ "      \"TextOpacity\" : \"60\","
-    			   //+ "      \"TextSize\" : \"regular\""
-    			   + "    }" 
-    			   + "  ]" 
-    			   + "}";
     	
     	Map<String, Object> button1  = new HashMap<>();
     	//button1.put("Type", "keyboard");
@@ -247,7 +201,18 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	)))); 				
 				
-		}
+		
 			
-    }
+    
+
+		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of( // send 'Hi UserName' when conversation
+																				// is started
+				new TextMessage("Hello  ,  " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation" ) )));
+	}
+
+
+}
+
+
+
 

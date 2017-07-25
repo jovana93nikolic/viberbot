@@ -2,12 +2,16 @@ package com.teamshort.viberbot.database.entity;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Version;
@@ -24,6 +28,7 @@ public class Room implements Serializable {
 	@Column(name = "id")
 	private long id;
 	
+	
 	@Column(name = "number")
 	private String number;
  
@@ -37,7 +42,8 @@ public class Room implements Serializable {
 		endWorkTime (type: java.time.LocalTime)
 	 * */
 	
-	
+	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Reservation> reservations;
 	
 	
 	@Column(name = "startWorkTime")

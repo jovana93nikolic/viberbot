@@ -1,4 +1,4 @@
-package com.teamshort.viberbot.service;
+package com.teamshort.viberbot.service.room;
 
 
 import com.teamshort.viberbot.database.entity.Room;
