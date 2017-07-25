@@ -1,4 +1,4 @@
-package com.teamshort.viberbot.service;
+package com.teamshort.viberbot.service.user;
 
 import com.teamshort.viberbot.database.entity.User;
 

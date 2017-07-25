@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
 import com.teamshort.viberbot.database.repository.UserRepository;
-import com.teamshort.viberbot.service.UserService;
-import com.teamshort.viberbot.service.UserServiceImpl;
+import com.teamshort.viberbot.service.user.UserService;
+import com.teamshort.viberbot.service.user.UserServiceImpl;
 
 @Controller
 public class UserController {

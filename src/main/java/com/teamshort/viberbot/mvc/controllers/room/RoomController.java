@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.repository.RoomRepository;
-import com.teamshort.viberbot.service.RoomService;
-import com.teamshort.viberbot.service.RoomServiceImpl;
+import com.teamshort.viberbot.service.room.RoomService;
+import com.teamshort.viberbot.service.room.RoomServiceImpl;
 
 @Controller
 public class RoomController {

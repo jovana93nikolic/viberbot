@@ -30,6 +30,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.Futures;
 import com.teamshort.viberbot.database.entity.User;
+import com.teamshort.viberbot.service.user.UserService;
 import com.viber.bot.message.TextMessage;
 import com.viber.bot.profile.UserProfile;
 
