@@ -113,15 +113,15 @@ public class ViberBotServiceImpl implements ViberBotService {
     	Map<String, Object> button1  = new HashMap<>();
     	//button1.put("Type", "keyboard");
     	button1.put("Columns", "3");
-    	button1.put("Rows", "1");
-//   	button1.put("BgColor", "#2db9b9");
+    	button1.put("Rows", "2");
+    	button1.put("BgColor", "#fee398");
 //    	button1.put("BgMediaType", "picture");
 //    	button1.put("BgMedia", "http://www.url.by/test.gif");
 //    	button1.put("BgLoop", "true");
 //    	button1.put("ActionType", "open-url");
 //    	button1.put("ActionBody", "www.tut.by");
 //    	button1.put("Image", "www.tut.by/img.jpg");
-    	button1.put("Text", "Prvi button");
+    	button1.put("Text", "Reserve room");
     	button1.put("TextVAlign", "middle");
     	button1.put("TextHAlign", "center");
     	button1.put("TextOpacity", "60");
@@ -133,17 +133,17 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	
     	Map<String, Object> button2  = new HashMap<>();
-//    	//button2.put("Type", "keyboard");
+    	//button2.put("Type", "keyboard");
     	button2.put("Columns", "3");
-    	button2.put("Rows", "1");
-//    	button2.put("BgColor", "#2db9b9");
+    	button2.put("Rows", "2");
+    	button2.put("BgColor", "#ffb6c1");
 //    	button2.put("BgMediaType", "picture");
 //    	button2.put("BgMedia", "http://www.url.by/test.gif");
 //    	button2.put("BgLoop", "true");
 //    	button2.put("ActionType", "open-url");
 //    	button2.put("ActionBody", "www.tut.by");
 //    	button2.put("Image", "www.tut.by/img.jpg");
-    	button2.put("Text", "Drugi button");
+    	button2.put("Text", "See previous reservations");
     	button2.put("TextVAlign", "middle");
     	button2.put("TextHAlign", "center");
     	button2.put("TextOpacity", "60");
@@ -174,14 +174,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 //    	keyboard.put("BgColor", "#FFFFFF");
     	keyboard.put("Type", "keyboard");
     	
-    	System.out.println("AFTER KEYBOARD HASMAP IS CREATED");
-    	
-    	
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
 				"Hello,  " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. KEYBOARD TEST!!!",
 				new MessageKeyboard(keyboard), null, new Integer(1)))));				
-    	System.out.println(keyboard.toString());
-    	System.out.println("AFTER on conversation call");
 
 	}
 
