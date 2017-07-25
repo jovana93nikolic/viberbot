@@ -181,15 +181,13 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
 				"Hello, " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. Please choose one of the options below:",
-				new MessageKeyboard(keyboard), null, new Integer(1)))));	
+				new MessageKeyboard(keyboard), welcomeTrackingData, new Integer(1)))));	
 		
 		
 
 		System.out.println("TrackingData:");
 			System.out.println(welcomeTrackingData.toString());
 		
-
-
 
 	}
 
