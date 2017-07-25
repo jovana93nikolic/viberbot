@@ -45,10 +45,12 @@ import com.google.common.collect.Maps;
 import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.teamshort.viberbot.database.entity.Reservation;
 import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
 import com.viber.bot.message.Message;
 import com.viber.bot.message.MessageKeyboard;
+import com.teamshort.viberbot.service.reservation.ReservationService;
 import com.teamshort.viberbot.service.room.RoomService;
 //import com.teamshort.viberbot.message.MessageKeyboard;
 import com.teamshort.viberbot.service.user.UserService;
@@ -66,6 +68,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 
     @Autowired
     private RoomService roomService;
+    
+
+    @Autowired
+    private ReservationService reservationService;
     
     @Override
 	public void onMessageReceived(ViberBot bot) {
@@ -147,14 +153,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 				//user enters the date
 				else if(message.getTrackingData().get("welcome").equals("dateObj")) {
 					
-					String dateStr = (String) message.getMapRepresentation().get("text");
-
-					LocalDate resDate = LocalDate.parse(dateStr);
+					String dateStr = (String) message.getMapRepresentation().get("text");					
 					
-					
-					response.send("Your date is: " + resDate.toString());
 				
-					Long roomId = Long.parseLong((String) message.getTrackingData().get("RoomID"));
+					String roomId = (String) message.getTrackingData().get("RoomID");
 		
 					System.out.println("RoomID in DATE is: " + roomId);
 		
@@ -162,13 +164,16 @@ public class ViberBotServiceImpl implements ViberBotService {
 					Map<String, Object> timeTrackingData = new HashMap<>();
 		            timeTrackingData.put("welcome", "timeObj");
 		            timeTrackingData.put("RoomID", roomId);
+		            timeTrackingData.put("Date", dateStr);
 		            
 					System.out.println("Time tracking Data HASHMAP created");
 
 
 		            TrackingData timeTr = new TrackingData(timeTrackingData);
 		                
-		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId));
+		            System.out.println("RoomID in TIMEE before keyboard:" + timeTr.get("RoomID"));
+		            
+		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId), LocalDate.parse(dateStr));
 				    	
 				    	
 		            System.out.println("Time keyboard created");
@@ -181,6 +186,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 				
 				//user enters the time
 				else if(message.getTrackingData().get("welcome").equals("timeObj")) {
+					
 					 if(message.getMapRepresentation().get("text").equals("Cancel")){
 						 System.out.println("In Cancel");   
 						 response.send(welcomeScreen(event.getSender().getName()));
@@ -188,25 +194,114 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 
 		                    }
 					 else {
+						 
 						 String timeSlotString = (String) message.getMapRepresentation().get("text");
-						 String roomIdString = (String) message.getMapRepresentation().get("RoomID");
-						 String userViberId = event.getSender().getId();
+						 String roomIdString = (String) message.getTrackingData().get("RoomID");
+						 //String userViberId = event.getSender().getId();
+						 String date = (String) message.getTrackingData().get("Date");
 						 
-						 System.out.println("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId);
+						 Room room = roomService.getRoomById(roomIdString);
 						 
-						 response.send(new TextMessage("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId));
-					 }
+						 //System.out.println("time: " + timeSlotString + "date: " + date + "roomId: " + roomIdString + "user: " + userViberId);
+						 
+						 String reservationDetails = "Would you like to confirm your reservation?"
+						 		+ "\nROOM: " + room.getName() + " " + room.getNumber()
+						 		+ "\nDATE: " + date
+						 		+ "\nTIME: " + timeSlotString;
+						 
+						 //reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
+						 
+						  Map<String, Object> confirmTrackingData = new HashMap<>();
+						  confirmTrackingData.put("welcome", "confObj");
+						  confirmTrackingData.put("RoomID", roomIdString);
+						  confirmTrackingData.put("Date", date);
+						  confirmTrackingData.put("Time", timeSlotString);
 
-				
-				
-				
+			              TrackingData confirmTr = new TrackingData(confirmTrackingData);
+						 
+						 MessageKeyboard confirmKeyboard = confirmReservationKeyboard();
+			              
+						 response.send(new TextMessage(reservationDetails,confirmKeyboard, confirmTr,new Integer(1)));
+					 }
+					 
+					 
 			}
+				//user confirms or cancels the reservation
+				else if(message.getTrackingData().get("welcome").equals("confObj")) {
+					if(message.getMapRepresentation().get("text").equals("Cancel")){
+						 System.out.println("In Cancel");   
+						 response.send(welcomeScreen(event.getSender().getName()));
+					
+						 
+		                    }
+					 else {
+						 String timeSlotString = (String) message.getTrackingData().get("Time");
+						 String roomIdString = (String) message.getTrackingData().get("RoomID");
+						 String userViberId = event.getSender().getId();
+						 String date = (String) message.getTrackingData().get("Date");
+						 
+						 
+			
+						 System.out.println("IN CONFIRM RESERVATION \ntime: " + timeSlotString + "date: " + date + "roomId: " + roomIdString + "user: " + userViberId);
+						 
+						 
+						 reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
+						 
+						 
+						 //not good practice
+						 response.send(new TextMessage("Your reservation was successfully created!"));
+						 
+						 response.send(welcomeScreen(event.getSender().getName()));
+					 }
+				}
 			}
 			
 		});
 	
 	}
 
+    private MessageKeyboard confirmReservationKeyboard() {
+
+    	ArrayList<Map> buttonsList  = new ArrayList<>();
+    	
+    	Map<String, Object> confirmButton = new HashMap<>();
+    	confirmButton.put("Columns", "2");
+    	confirmButton.put("Rows", "1");
+    	confirmButton.put("BgColor", "#fee398");
+    	confirmButton.put("Text", "Confirm");
+    	confirmButton.put("TextVAlign", "middle");
+		confirmButton.put("TextHAlign", "center");
+		confirmButton.put("TextOpacity", "60");
+		confirmButton.put("TextSize", "regular");
+		confirmButton.put("ActionType", "reply");
+		confirmButton.put("ActionBody", "Confirm");
+		confirmButton.put("TextSize", "regular");
+    	
+		Map<String, Object> cancelButton = new HashMap<>();
+		confirmButton.put("Columns", "2");
+    	cancelButton.put("Rows", "1");
+    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("Text", "Cancel");
+    	cancelButton.put("TextVAlign", "middle");
+    	cancelButton.put("TextHAlign", "center");
+    	cancelButton.put("TextOpacity", "60");
+    	cancelButton.put("TextSize", "regular");
+    	cancelButton.put("ActionType", "reply");
+    	cancelButton.put("ActionBody", "Cancel");
+    	cancelButton.put("TextSize", "regular");
+    	
+    	buttonsList.add(confirmButton);
+    	buttonsList.add(cancelButton);
+    	
+    	Map<String, Object> keyboard  = new HashMap<>();
+    	keyboard.put("Buttons", buttonsList);
+    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("Type", "keyboard");
+    	
+    	
+    	return new MessageKeyboard(keyboard);
+    	
+    }
     
     private MessageKeyboard createRoomKeyboard() {
     	
@@ -265,35 +360,41 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     }
     
-    private MessageKeyboard createTimeKeyboard(Room room) {
+    private MessageKeyboard createTimeKeyboard(Room room, LocalDate date) {
+    	
+    	
     	
     	System.out.println("IN createTimeKeyboard");
+    	
+    	System.out.println("Rooom is " + room.toString());
+    	
+    	Iterable<LocalTime> availableSlots = reservationService.getFreeRoomCapacitiesOnDate(room.getId(), date);
+    	
     
     	ArrayList<Map> buttonsList  = new ArrayList<>();
-    	LocalTime time = room.getStartWorkTime();
-    	LocalTime endTime = room.getEndWorkTime();
+    	//LocalTime time = room.getStartWorkTime();
+    	//LocalTime endTime = room.getEndWorkTime();
     	
-    	System.out.println("time is: " + time + " endTime is: " + endTime);
+    	//System.out.println("time is: " + time + " endTime is: " + endTime);
     	
-    	while (time.isBefore(endTime)) {
+    	for (LocalTime slot: availableSlots) {
     		
-    		System.out.println("time is: " + time + " endTime is: " + endTime);
+    		System.out.println("time is: " + slot);
     		
     		Map<String, Object> timeButton = new HashMap<>();
     		timeButton.put("Rows", "1");
     		timeButton.put("BgColor", "#fee398");
-    		timeButton.put("Text", time.toString());
+    		timeButton.put("Text", slot.toString());
     		timeButton.put("TextVAlign", "middle");
     		timeButton.put("TextHAlign", "center");
     		timeButton.put("TextOpacity", "60");
     		timeButton.put("TextSize", "regular");
     		timeButton.put("ActionType", "reply");
-    		timeButton.put("ActionBody", time.toString());
+    		timeButton.put("ActionBody", slot.toString());
     		timeButton.put("TextSize", "regular");
         	
         	buttonsList.add(timeButton);
         	
-        	time = time.plusHours(1);
         	
     		
     	}

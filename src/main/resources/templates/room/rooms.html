@@ -7,10 +7,10 @@
 	<style media="screen">
     body {
         background-color: #F9F9F9;
-        background-image: url("https://s-media-cache-ak0.pinimg.com/originals/2b/0f/0f/2b0f0fb7dd3ad0cc2d3f8d1c7e82d294.jpg");
+        background-image: url("https://s-media-cache-ak0.pinimg.com/originals/14/22/07/142207cfb41addee27b138fa7b7638d0.jpg");
         background-position: center top;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: fit;
        
     }
 </style>
@@ -23,16 +23,13 @@
 </head>
 <body>
 <div class="container">
-    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+     <th:block th:include="fragments/header :: header"></th:block>
     <div th:if="${not #lists.isEmpty(rooms)}">
         <h2>Room List</h2>
-        
-         <p><a th:href="@{/room/new}">ADD NEW ROOM</a></p>
-        
-        
+        <div class="bodycontainer scrollable">
         <table class="table table-bordered">
             <thead>
-            <tr class="warning">
+            <tr class="info">
                 
                 <th>Name</th>
                 <th>Number</th>
@@ -58,6 +55,10 @@
             
             </tr>
         </table>
+        </div>
+         <p><a class="btn btn-default" th:href="@{/room/new}" role="button">ADD NEW ROOM
+          <span class="glyphicon glyphicon-plus"></span></a></p>
+        
 
     </div>
 </div>
