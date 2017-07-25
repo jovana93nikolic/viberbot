@@ -204,14 +204,17 @@ public class ViberBotServiceImpl implements ViberBotService {
     	keyboard.put("Type", "keyboard");
     	
     	
-    	TrackingData welcomeTrackingData = new TrackingData();
+    	Map<String, Object> welcomeTrackingData = new HashMap<>();
     	welcomeTrackingData.put("welcome", "welcomeObj");
+    	TrackingData trackingData = new TrackingData(welcomeTrackingData);
+    	
+    	
     	
 
     	
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
 				"Hello, " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. Please choose one of the options below:",
-				new MessageKeyboard(keyboard), welcomeTrackingData, new Integer(1)))));	
+				new MessageKeyboard(keyboard), trackingData, new Integer(1)))));	
 		
 		
 
