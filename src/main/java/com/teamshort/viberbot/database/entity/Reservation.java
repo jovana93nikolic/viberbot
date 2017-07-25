@@ -64,9 +64,8 @@ public class Reservation implements Serializable {
 	
 	
 	
-	public Reservation(Long id, User user, Room room,  String date, String time) {
+	public Reservation(User user, Room room,  String date, String time) {
 		super();
-		this.id = id;
 		this.user = user;
 		this.room = room;
 		this.date = LocalDate.parse(date);

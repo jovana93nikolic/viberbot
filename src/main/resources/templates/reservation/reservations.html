@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-
-<title>Users</title>
-
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
+<body>
+	</head>
 <body>
 	<div class="container">
 		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
@@ -27,7 +22,7 @@
 						<th>Room</th>
 						
 						<th>Reserve</th>
-						<th>Edit</th>
+<!-- NotNeeded				    	<th>Edit</th>  -->
 						<th>Delete</th>
 
 					</tr>
@@ -39,6 +34,7 @@
 					<td th:text="${reservation.room}">Room</td>
 					
 					<td><a th:href="${'/reservation/reserve/' + reservation.id}">Reserve</a></td>
+<!-- NotNeeded					<td><a th:href="${'/reservation/edit/' + reservation.id}">Edit</a></td>  -->
 					<td><a th:href="${'/reservation/delete/' + reservation.id}">Delete</a></td>
 				</tr>
 			</table>	
