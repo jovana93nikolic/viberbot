@@ -37,7 +37,7 @@ public class User {
 	private boolean subscribe;
 	
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<Reservation> reservations;
 	
 	public User() {}

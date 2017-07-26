@@ -38,6 +38,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public Iterable<LocalTime> getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date) {
+		System.out.println("This is our room " + roomId);
+		System.out.println("This is our room " + date);
 		return reservationRepository.getFreeRoomCapacitiesOnDate(roomId, date);
 		//return null;
 	}

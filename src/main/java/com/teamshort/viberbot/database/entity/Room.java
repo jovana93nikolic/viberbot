@@ -42,7 +42,7 @@ public class Room implements Serializable {
 		endWorkTime (type: java.time.LocalTime)
 	 * */
 	
-	@OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
 	private Set<Reservation> reservations;
 	
 	
