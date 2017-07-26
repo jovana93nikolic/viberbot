@@ -7,6 +7,8 @@ import com.viber.bot.api.ViberBot;
 import com.viber.bot.event.callback.OnMessageReceived;
 import com.viber.bot.event.callback.OnSubscribe;
 import com.viber.bot.event.callback.OnUnsubscribe;
+import com.viber.bot.event.incoming.IncomingConversationStartedEvent;
+import com.viber.bot.event.incoming.IncomingEvent;
 import com.viber.bot.event.incoming.IncomingMessageEvent;
 import com.viber.bot.event.incoming.IncomingSubscribedEvent;
 import com.viber.bot.event.incoming.IncomingUnsubscribeEvent;
@@ -39,6 +41,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
 import com.viber.bot.message.Message;
@@ -111,7 +114,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					 if(message.getMapRepresentation().get("text").equals("Cancel")){
 						 System.out.println("In Cancel");   
-						 onConversationStarted(bot);
+						welcomeScreen(event);
+						 
 		                    }
 
 
@@ -266,17 +270,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 		
 	}
 	
-
-    @Override
-	public void onConversationStarted(ViberBot bot) {
-
-    	
-		//bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of
-    	//(/*new TextMessage("Hello  ,  " + event.getUser().getName() + 
-    	//"! Welcome to ViberBot Room Reservation" )*/)));
-    	
-    	
-    	Map<String, Object> button1  = new HashMap<>();
+	private MessageKeyboard createWelcomeKeyboard(){
+		Map<String, Object> button1  = new HashMap<>();
     	button1.put("Columns", "3");
     	button1.put("Rows", "2");
     	button1.put("BgColor", "#fee398");
@@ -326,18 +321,22 @@ public class ViberBotServiceImpl implements ViberBotService {
 //    	keyboard.put("BgColor", "#FFFFFF");
     	keyboard.put("Type", "keyboard");
     	
+    	return new MessageKeyboard(keyboard);
+	}
+	
+    @Override
+	public void onConversationStarted(ViberBot bot) {
+    	
+    	MessageKeyboard welcomeKeyboard=createWelcomeKeyboard();
     	
     	Map<String, Object> welcomeTrackingData = new HashMap<>();
     	welcomeTrackingData.put("welcome", "welcomeObj");
     	TrackingData trackingData = new TrackingData(welcomeTrackingData);
     	
     	
-    	
-
-    	
 		bot.onConversationStarted(event -> Futures.immediateFuture(Optional.of(new TextMessage(
 				"Hello, " + event.getUser().getName() + "! Welcome to ViberBot Room Reservation. Please choose one of the options below:",
-				new MessageKeyboard(keyboard), trackingData, new Integer(1)))));	
+				new MessageKeyboard(welcomeKeyboard), trackingData, new Integer(1)))));	
 		
 		
 
@@ -346,7 +345,29 @@ public class ViberBotServiceImpl implements ViberBotService {
 		
 
 	}
+    
+    
+    public ListenableFuture<Optional<TextMessage>> welcomeScreen(IncomingMessageEvent event){
+    
+    	MessageKeyboard welcomeKeyboard=createWelcomeKeyboard();
+    	
+    	Map<String, Object> welcomeTrackingData = new HashMap<>();
+    	welcomeTrackingData.put("welcome", "welcomeObj");
+    	TrackingData trackingData = new TrackingData(welcomeTrackingData);
+    
 
+    	System.out.println("In WELCOME SCREEN");
+		System.out.println("TrackingData:");
+			System.out.println(welcomeTrackingData.toString());
+
+		
+			return Futures.immediateFuture(Optional.of(new TextMessage(
+					"Hello, " + event.getSender().getName() + "! Welcome to ViberBot Room Reservation. Please choose one of the options below:",
+					new MessageKeyboard(welcomeKeyboard), trackingData, new Integer(1))));	
+		
+		
+
+    }
 
 }
 

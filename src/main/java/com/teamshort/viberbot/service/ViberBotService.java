@@ -23,5 +23,6 @@ public interface ViberBotService {
 	void unsubscribe(ViberBot bot);
 
 	void onConversationStarted(ViberBot bot);
+
 	
 }
