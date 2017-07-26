@@ -45,6 +45,7 @@ import com.google.common.collect.Maps;
 import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.teamshort.viberbot.database.entity.Reservation;
 import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
 import com.viber.bot.message.Message;
@@ -208,6 +209,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 				         confTrackingData.put("Time", timeSlotString);
 				         confTrackingData.put("Date", dateStr);
 				         confTrackingData.put("RoomID", roomIdString);
+				         confTrackingData.put("UserViberID", userViberId);
 				          
 
 				            TrackingData confTr = new TrackingData(confTrackingData);
@@ -223,6 +225,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 				}
 					//user enters the time
 						else if(message.getTrackingData().get("welcome").equals("confObj")) {
+							
+							TrackingData data = message.getTrackingData();
+							
+							reservationService.reserve(new Reservation(userService.getByViberId((String)data.get("UserViberID")), roomService.getRoomById((String)data.get("RoomID")), (String) data.get("Date"),(String)  data.get("Time") ));
 							
 							response.send("You have successfully confirmed your reservation!");
 							
