@@ -167,6 +167,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					Map<String, Object> timeTrackingData = new HashMap<>();
 		            timeTrackingData.put("welcome", "timeObj");
 		            timeTrackingData.put("RoomID", roomId);
+		            timeTrackingData.put("Date", dateStr);
 		            
 					System.out.println("Time tracking Data HASHMAP created");
 
@@ -194,12 +195,27 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                    }
 					 else {
 						 String timeSlotString = (String) message.getMapRepresentation().get("text");
-						 String roomIdString = (String) message.getMapRepresentation().get("RoomID");
+						 String roomIdString = (String) message.getTrackingData().get("RoomID");
 						 String userViberId = event.getSender().getId();
+						 String dateStr = (String) message.getTrackingData().get("Date");
 						 
 						 System.out.println("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId);
 						 
-						 response.send(new TextMessage("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId));
+						 Map<String, Object> confTrackingData = new HashMap<>();
+				         confTrackingData.put("welcome", "timeObj");
+				         confTrackingData.put("Time", timeSlotString);
+				         confTrackingData.put("Date", dateStr);
+				         confTrackingData.put("RoomID", roomIdString);
+				          
+
+				            TrackingData confTr = new TrackingData(confTrackingData);
+				                
+				            MessageKeyboard confKeyboard = createConfirmKeyboard();
+						    	
+						 
+						 
+						 response.send(new TextMessage("Do you wish to confirm reservation?", confKeyboard, confTr, new Integer(1)));
+						 
 					 }
 
 				
@@ -270,6 +286,58 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     }
     
+    private MessageKeyboard createConfirmKeyboard() {
+    	
+    	ArrayList<Map> buttonsList  = new ArrayList<>();
+    
+    		
+    		Map<String, Object> confButton = new HashMap<>();
+    		confButton.put("Rows", "1");
+    		confButton.put("BgColor", "#fee398");
+    		confButton.put("Text", "Confirm");
+    		confButton.put("TextVAlign", "middle");
+    		confButton.put("TextHAlign", "center");
+    		confButton.put("TextOpacity", "60");
+    		confButton.put("TextSize", "regular");
+    		confButton.put("ActionType", "reply");
+    		confButton.put("ActionBody", "Confirm");
+    		confButton.put("TextSize", "regular");
+        	
+        	buttonsList.add(confButton);
+        	
+    		
+    	
+    	
+    	Map<String, Object> cancelButton = new HashMap<>();
+    	cancelButton.put("Rows", "1");
+    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("Text", "Cancel");
+    	cancelButton.put("TextVAlign", "middle");
+    	cancelButton.put("TextHAlign", "center");
+    	cancelButton.put("TextOpacity", "60");
+    	cancelButton.put("TextSize", "regular");
+    	cancelButton.put("ActionType", "reply");
+    	cancelButton.put("ActionBody", "Cancel");
+    	cancelButton.put("TextSize", "regular");
+    	
+    	buttonsList.add(cancelButton);
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	Map<String, Object> keyboard  = new HashMap<>();
+    	keyboard.put("Buttons", buttonsList);
+    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("Type", "keyboard");
+    	
+    	
+    	return new MessageKeyboard(keyboard);
+    
+    
+    }
     private MessageKeyboard createTimeKeyboard(Room room, String date) {
     	
     	System.out.println("IN createTimeKeyboard, room  " + room.getId() + " date: " + date);
