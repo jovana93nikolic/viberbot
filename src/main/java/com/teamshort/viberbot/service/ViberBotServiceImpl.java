@@ -126,14 +126,14 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		                System.out.println("In choosing date");
 
-		                Long roomId = Long.parseLong((String)message.getMapRepresentation().get("text")); //which room
+		                String roomIdString = (String) message.getMapRepresentation().get("text"); //which room
 		                	
-		                System.out.println("Room is" + roomId);
+		                System.out.println("Room is" + roomIdString);
 	
 
 		                Map<String, Object> dateTrackingData = new HashMap<>();
 		                dateTrackingData.put("welcome", "dateObj");
-		                dateTrackingData.put("RoomID", (Long) roomId);
+		                dateTrackingData.put("RoomID", roomIdString);
 
 		                TrackingData dateTr = new TrackingData(dateTrackingData);
 		               
@@ -154,7 +154,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					response.send("Your date is: " + resDate.toString());
 				
-					Long roomId = (Long) message.getTrackingData().get("RoomID");
+					Long roomId = Long.parseLong((String) message.getTrackingData().get("RoomID"));
 		
 					System.out.println("RoomID in DATE is: " + roomId);
 		
