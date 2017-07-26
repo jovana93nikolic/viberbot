@@ -159,7 +159,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	button1.put("TextOpacity", "60");
     	button1.put("TextSize", "regular");
     	button1.put("ActionType", "reply");
-    	button1.put("ActionBody", "reply to PA");
+    	button1.put("ActionBody", "Reserve room");
     	button1.put("TextSize", "regular");
     	
     	
@@ -181,7 +181,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	button2.put("TextOpacity", "60");
     	button2.put("TextSize", "regular");
     	button2.put("ActionType", "reply");
-    	button2.put("ActionBody", "reply to PA");
+    	button2.put("ActionBody", "See previous reservations");
     	button2.put("TextSize", "regular");
     	
     	
