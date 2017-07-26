@@ -201,14 +201,19 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 String userViberId = event.getSender().getId();
 						 String date = (String) message.getTrackingData().get("Date");
 						 
+						 Room room = roomService.getRoomById(roomIdString);
+						 
 						 System.out.println("time: " + timeSlotString + "date: " + date + "roomId: " + roomIdString + "user: " + userViberId);
 						 
-						 
+						 String reservationDetails = "Would you like to confirm your reservation?"
+						 		+ "\nROOM: " + room.getName() + " " + room.getNumber()
+						 		+ "\nDATE: " + date
+						 		+ "\nTIME: " + timeSlotString;
 						 
 						 reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
 						 
 						 
-						 response.send(new TextMessage("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId));
+						 response.send(new TextMessage(reservationDetails));
 					 }
 
 				
