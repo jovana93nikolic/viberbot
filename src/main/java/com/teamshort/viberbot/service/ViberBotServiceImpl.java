@@ -276,6 +276,9 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Iterable<LocalTime> availableTimes = reservationService.getFreeRoomCapacitiesOnDate(room.getId(), LocalDate.parse(date));
     
+    	
+    	System.out.println(availableTimes.toString());
+    	
     	for(LocalTime time: availableTimes) {
     		System.out.println("Available times: " + time.toString());
     	}
@@ -288,7 +291,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	while (time.isBefore(endTime)) {
     		
-    		System.out.println("time is: " + time + " endTime is: " + endTime);
+    		//System.out.println("time is: " + time + " endTime is: " + endTime);
     		
     		Map<String, Object> timeButton = new HashMap<>();
     		timeButton.put("Rows", "1");
