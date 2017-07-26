@@ -193,7 +193,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					 else {
 						 
 						 String timeSlotString = (String) message.getMapRepresentation().get("text");
-						 String roomIdString = (String) message.getMapRepresentation().get("RoomID");
+						 String roomIdString = (String) message.getTrackingData().get("RoomID");
 						 String userViberId = event.getSender().getId();
 						 
 						 System.out.println("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId);
