@@ -68,13 +68,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 			public void messageReceived(IncomingMessageEvent event, Message message, Response response) {
 				
 				
-				
+				System.out.println("In MessageReceived");
 				if(message.getTrackingData().get("welcome").equals("welcomeObj")){
-				
-					if(message.getMapRepresentation().equals("Reserve room"))
-						response.send("You want to reserve a room!");
-					else if(message.getMapRepresentation().equals("See previous reservations"))
-						response.send("You want to see previous reservations!");
+					
+					if(message.getMapRepresentation().equals("Reserve room")){
+						System.out.println("In Reserve room");
+						response.send("You want to reserve a room!");}
+					else if(message.getMapRepresentation().equals("See previous reservations")){
+						System.out.println("In Previous reservations");
+						response.send("You want to see previous reservations!");}
 					
 					
 				}
