@@ -148,6 +148,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					}
 					
 				}
+			
 				
 				//user enters the date
 				else if(message.getTrackingData().get("welcome").equals("dateObj")) {
@@ -159,7 +160,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					response.send("Your date is: " + resDate.toString());
 				
-					Long roomId = Long.parseLong((String) message.getTrackingData().get("RoomID"));
+					String roomId = (String) message.getTrackingData().get("RoomID");
 		
 					System.out.println("RoomID in DATE is: " + roomId);
 		
@@ -183,7 +184,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 		            response.send(new TextMessage("Please choose time:", timeKeyboard, timeTr, new Integer(1)));
 					
 				}
-				
+			
+			
 				
 				//user enters the time
 				else if(message.getTrackingData().get("welcome").equals("timeObj")) {
