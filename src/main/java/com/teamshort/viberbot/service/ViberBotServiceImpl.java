@@ -224,11 +224,33 @@ public class ViberBotServiceImpl implements ViberBotService {
 			              
 						 response.send(new TextMessage(reservationDetails,confirmKeyboard, confirmTr,new Integer(1)));
 					 }
-
-				
-				
-				
+					 
+					 
 			}
+				//user confirms or cancels the reservation
+				else if(message.getTrackingData().get("welcome").equals("confObj")) {
+					if(message.getMapRepresentation().get("text").equals("Cancel")){
+						 System.out.println("In Cancel");   
+						 response.send(welcomeScreen(event.getSender().getName()));
+					
+						 
+		                    }
+					 else {
+						 String timeSlotString = (String) message.getTrackingData().get("text");
+						 String roomIdString = (String) message.getTrackingData().get("RoomID");
+						 String userViberId = event.getSender().getId();
+						 String date = (String) message.getTrackingData().get("Date");
+						 
+						 
+			
+						 System.out.println("IN CONFIRM RESERVATION \ntime: " + timeSlotString + "date: " + date + "roomId: " + roomIdString + "user: " + userViberId);
+						 
+						 
+						 reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
+						 
+						 response.send(new TextMessage("Your reservation was successfully created!"));
+					 }
+				}
 			}
 			
 		});
@@ -240,8 +262,8 @@ public class ViberBotServiceImpl implements ViberBotService {
     	ArrayList<Map> buttonsList  = new ArrayList<>();
     	
     	Map<String, Object> confirmButton = new HashMap<>();
-    	confirmButton.put("Columns", "3");
-    	confirmButton.put("Rows", "2");
+    	confirmButton.put("Columns", "2");
+    	confirmButton.put("Rows", "1");
     	confirmButton.put("BgColor", "#fee398");
     	confirmButton.put("Text", "Confirm");
     	confirmButton.put("TextVAlign", "middle");
@@ -253,8 +275,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 		confirmButton.put("TextSize", "regular");
     	
 		Map<String, Object> cancelButton = new HashMap<>();
-		confirmButton.put("Columns", "3");
-    	cancelButton.put("Rows", "2");
+		confirmButton.put("Columns", "2");
+    	cancelButton.put("Rows", "1");
     	cancelButton.put("BgColor", "#CD3E2D");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
