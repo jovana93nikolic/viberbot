@@ -118,7 +118,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                System.out.println("In choosing date");
 
 		                Long roomId = Long.parseLong((String)message.getMapRepresentation().get("text")); //which room
-
+		                	
+		                System.out.println("Room is" + roomId);
+		                
 		                //roomService.getRoomById(roomId);
 
 		                //response.send("You want to reserve room" + roomService.getRoomById(roomId).getName());
