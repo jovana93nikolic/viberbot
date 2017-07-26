@@ -168,6 +168,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		            TrackingData timeTr = new TrackingData(timeTrackingData);
 		                
+		            System.out.println("RoomID in TIMEE before keyboard:" + timeTr.get(roomId));
+		            
 		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId));
 				    	
 				    	
@@ -181,6 +183,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 				
 				//user enters the time
 				else if(message.getTrackingData().get("welcome").equals("timeObj")) {
+					
 					 if(message.getMapRepresentation().get("text").equals("Cancel")){
 						 System.out.println("In Cancel");   
 						 response.send(welcomeScreen(event.getSender().getName()));
