@@ -20,7 +20,7 @@ public interface ReservationService {
 	Reservation edit (Reservation reservation);
 	void delete(Long id);
 	Iterable<LocalTime> getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date);
-	String getByUser(String viberId);
+	Iterable<Reservation> getByUser(String viberId);
 	
 	
 }

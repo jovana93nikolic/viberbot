@@ -113,7 +113,23 @@ public class ViberBotServiceImpl implements ViberBotService {
 					//user wants to previous reservations
 					else if(message.getMapRepresentation().get("text").equals("See previous reservations")){
 						System.out.println("In Previous reservations");
-						response.send("You want to see previous reservations!");}	
+						response.send("You want to see previous reservations!");
+						
+					
+						Map<String, Object> reservationsTrackingData = new HashMap<>();
+				    	reservationsTrackingData.put("welcome", "reservatiosObj");
+				    	TrackingData reservationsTr = new TrackingData(reservationsTrackingData);
+				    	
+				    	MessageKeyboard reservationsKeyboard = createReservationsKeyboard(event.getSender().getId());
+				    	
+				    	
+				    	response.send(new TextMessage("Please choose one of the available rooms:", reservationsKeyboard
+								, reservationsTr, new Integer(1)));
+					
+					
+					
+					
+					}	
 					
 				}
 				
@@ -242,6 +258,56 @@ public class ViberBotServiceImpl implements ViberBotService {
 	
 	}
 
+    private MessageKeyboard createReservationsKeyboard(String userViberId) {
+    	List<Reservation> resList = (List<Reservation>) reservationService.getByUser(userViberId);
+    	
+    	
+    	ArrayList<Map> buttonsList  = new ArrayList<>();
+    	
+    	
+    	for (Reservation res: resList){
+    		
+    		Map<String, Object> resButton = new HashMap<>();
+    		resButton.put("Rows", "1");
+    		resButton.put("BgColor", "#fee398");
+    		resButton.put("Text", res.toString());
+    		resButton.put("TextVAlign", "middle");
+    		resButton.put("TextHAlign", "center");
+        	resButton.put("TextOpacity", "60");
+        	resButton.put("TextSize", "regular");
+        	resButton.put("ActionType", "reply");
+        	resButton.put("ActionBody", res.getId());
+        	resButton.put("TextSize", "regular");
+        	
+        	buttonsList.add(resButton);
+        	
+    		
+    	}
+    	
+    	Map<String, Object> cancelButton = new HashMap<>();
+    	cancelButton.put("Rows", "1");
+    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("Text", "Cancel");
+    	cancelButton.put("TextVAlign", "middle");
+    	cancelButton.put("TextHAlign", "center");
+    	cancelButton.put("TextOpacity", "60");
+    	cancelButton.put("TextSize", "regular");
+    	cancelButton.put("ActionType", "reply");
+    	cancelButton.put("ActionBody", "Cancel");
+    	cancelButton.put("TextSize", "regular");
+    	
+    	buttonsList.add(cancelButton);
+    		
+    	Map<String, Object> keyboard  = new HashMap<>();
+    	keyboard.put("Buttons", buttonsList);
+    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("Type", "keyboard");
+    	
+    	
+    	return new MessageKeyboard(keyboard);
+    	
+    	
+    }
     
     private MessageKeyboard createRoomKeyboard() {
     	

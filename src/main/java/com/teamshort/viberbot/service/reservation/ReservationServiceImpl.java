@@ -45,12 +45,11 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public String getByUser(String viberId) {
+	public Iterable<Reservation> getByUser(String viberId) {
 		// TODO Auto-generated method stub
 		
 		
-		
-		return null;
+		return (Iterable<Reservation>) reservationRepository.getByUser(viberId);
 	}
 	
 	
