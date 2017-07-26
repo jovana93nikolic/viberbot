@@ -69,8 +69,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 				
 				
 				System.out.println("In MessageReceived");
-				//if(message.getTrackingData().get("welcome").equals("welcomeObj")){
-					
+				if(message.getTrackingData().get("welcome").equals("welcomeObj")){
+					System.out.println("In Welcome");
 					if(message.getMapRepresentation().get("text").equals("Reserve room")){
 						System.out.println("In Reserve room");
 						response.send("You want to reserve a room!");}
@@ -81,7 +81,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 				}
 				
-			//}
+			}
 			
 			
 		});
