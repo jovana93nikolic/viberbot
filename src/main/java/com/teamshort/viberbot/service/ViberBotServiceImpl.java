@@ -272,19 +272,19 @@ public class ViberBotServiceImpl implements ViberBotService {
     
     private MessageKeyboard createTimeKeyboard(Room room, String date) {
     	
-    	System.out.println("IN createTimeKeyboard");
+    	System.out.println("IN createTimeKeyboard, room  " + room.getId() + " date: " + date);
     	
     	Iterable<LocalTime> availableTimes = reservationService.getFreeRoomCapacitiesOnDate(room.getId(), LocalDate.parse(date));
     
     	for(LocalTime time: availableTimes) {
-    		System.out.println(time);
+    		System.out.println("Available times: " + time.toString());
     	}
-    	
+    	    	
     	ArrayList<Map> buttonsList  = new ArrayList<>();
     	LocalTime time = room.getStartWorkTime();
     	LocalTime endTime = room.getEndWorkTime();
     	
-    	System.out.println("time is: " + time + " endTime is: " + endTime);
+    	//System.out.println("time is: " + time + " endTime is: " + endTime);
     	
     	while (time.isBefore(endTime)) {
     		
