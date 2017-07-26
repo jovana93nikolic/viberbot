@@ -274,13 +274,13 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	System.out.println("IN createTimeKeyboard, room  " + room.getId() + " date: " + date);
     	
-    	Iterable<LocalTime> availableTimes = reservationService.getFreeRoomCapacitiesOnDate(room.getId(), LocalDate.parse(date));
+    	List<LocalTime> notavAilableTimes = (List<LocalTime>) reservationService.getFreeRoomCapacitiesOnDate(room.getId(), LocalDate.parse(date));
     
     	
-    	System.out.println(availableTimes.toString());
+    	System.out.println(notavAilableTimes.toString());
     	
-    	for(LocalTime time: availableTimes) {
-    		System.out.println("Available times: " + time.toString());
+    	for(LocalTime time: notavAilableTimes) {
+    		System.out.println("NOTAvailable times: " + time.toString());
     	}
     	    	
     	ArrayList<Map> buttonsList  = new ArrayList<>();
@@ -292,7 +292,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	while (time.isBefore(endTime)) {
     		
     		//System.out.println("time is: " + time + " endTime is: " + endTime);
-    		
+    		if (!notavAilableTimes.contains(time)) {
     		Map<String, Object> timeButton = new HashMap<>();
     		timeButton.put("Rows", "1");
     		timeButton.put("BgColor", "#fee398");
@@ -306,7 +306,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		timeButton.put("TextSize", "regular");
         	
         	buttonsList.add(timeButton);
-        	
+    		}
         	time = time.plusHours(1);
         	
     		
