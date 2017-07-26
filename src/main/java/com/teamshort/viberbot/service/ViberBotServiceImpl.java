@@ -45,10 +45,12 @@ import com.google.common.collect.Maps;
 import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.teamshort.viberbot.database.entity.Reservation;
 import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
 import com.viber.bot.message.Message;
 import com.viber.bot.message.MessageKeyboard;
+import com.teamshort.viberbot.service.reservation.ReservationService;
 import com.teamshort.viberbot.service.room.RoomService;
 //import com.teamshort.viberbot.message.MessageKeyboard;
 import com.teamshort.viberbot.service.user.UserService;
@@ -66,6 +68,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 
     @Autowired
     private RoomService roomService;
+    
+
+    @Autowired
+    private ReservationService reservationService;
     
     @Override
 	public void onMessageReceived(ViberBot bot) {
@@ -147,12 +153,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 				//user enters the date
 				else if(message.getTrackingData().get("welcome").equals("dateObj")) {
 					
-					String dateStr = (String) message.getMapRepresentation().get("text");
-
-					LocalDate resDate = LocalDate.parse(dateStr);
+					String dateStr = (String) message.getMapRepresentation().get("text");					
 					
-					
-					response.send("Your date is: " + resDate.toString());
+					response.send("Your date is: " + dateStr);
 				
 					String roomId = (String) message.getTrackingData().get("RoomID");
 		
@@ -162,6 +165,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					Map<String, Object> timeTrackingData = new HashMap<>();
 		            timeTrackingData.put("welcome", "timeObj");
 		            timeTrackingData.put("RoomID", roomId);
+		            timeTrackingData.put("Date", dateStr);
 		            
 					System.out.println("Time tracking Data HASHMAP created");
 
@@ -195,8 +199,14 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 String timeSlotString = (String) message.getMapRepresentation().get("text");
 						 String roomIdString = (String) message.getTrackingData().get("RoomID");
 						 String userViberId = event.getSender().getId();
+						 String date = (String) message.getTrackingData().get("Date");
 						 
-						 System.out.println("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId);
+						 System.out.println("time: " + timeSlotString + "date: " + date + "roomId: " + roomIdString + "user: " + userViberId);
+						 
+						 
+						 
+						 reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
+						 
 						 
 						 response.send(new TextMessage("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId));
 					 }
