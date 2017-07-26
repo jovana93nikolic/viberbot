@@ -1,6 +1,7 @@
 package com.teamshort.viberbot.service.reservation;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.teamshort.viberbot.database.entity.Reservation;
 
@@ -16,10 +17,10 @@ public interface ReservationService {
 	
 	Iterable<Reservation> getAll();
 	Reservation reserve(Reservation reservation);
-	void edit (Reservation reservation);
+	Reservation edit (Reservation reservation);
 	void delete(Long id);
-	String getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date);
-	String getByUser(String viberId);
+	Iterable<LocalTime> getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date);
+	Reservation getByUser(String viberId);
 	
 	
 }

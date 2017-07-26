@@ -247,7 +247,11 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 
 						 reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
 						 
+						 
+						 //not good practice
 						 response.send(new TextMessage("Your reservation was successfully created!"));
+						 
+						 response.send(welcomeScreen(event.getSender().getName()));
 					 }
 				}
 			}
