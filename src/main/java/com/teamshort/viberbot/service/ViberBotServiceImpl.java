@@ -108,13 +108,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 				//from get available rooms to enter date
 				if(message.getTrackingData().get("welcome").equals("roomsObj")){
 					
-					 if(message.getMapRepresentation().get("text").equals("Cancel"))
-		                    onConversationStarted(bot);
+					 if(message.getMapRepresentation().get("text").equals("Cancel")){
+						 System.out.println("In Cancel");   
+						 onConversationStarted(bot);
+		                    }
 
 
 		                System.out.println("In choosing date");
 
-		                Long roomId = (Long) message.getMapRepresentation().get("text"); //which room
+		                Long roomId = Long.parseLong((String)message.getMapRepresentation().get("text")); //which room
 
 		                roomService.getRoomById(roomId);
 
