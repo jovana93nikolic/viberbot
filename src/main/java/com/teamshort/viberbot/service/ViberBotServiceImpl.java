@@ -72,16 +72,14 @@ public class ViberBotServiceImpl implements ViberBotService {
 				
 				System.out.println(message.getMapRepresentation().get("text"));
 				
+				//reserve or show reservations 
 				if(message.getTrackingData().get("welcome").equals("welcomeObj")){
 					System.out.println("In Welcome");
 					
 					
 					//user wants to reserve a room
 					if(message.getMapRepresentation().get("text").equals("Reserve room")){
-						System.out.println("In Reserve room");
-						response.send("You want to reserve a room!");
-						
-						
+						System.out.println("In Reserve room");		
 
 				    	Map<String, Object> roomsTrackingData = new HashMap<>();
 				    	roomsTrackingData.put("welcome", "roomsObj");
@@ -93,9 +91,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 				    	response.send(new TextMessage("Please choose one of the available rooms:", roomsKeyboard
 								, roomsTr, new Integer(1)));
 				    	
-					
-					
 					}
+					
+					
 					
 					
 					
@@ -105,6 +103,24 @@ public class ViberBotServiceImpl implements ViberBotService {
 						response.send("You want to see previous reservations!");}	
 					
 				}
+				
+				
+				//from get available rooms to enter date
+				if(message.getTrackingData().get("welcome").equals("roomsObj")){
+					
+					System.out.println("In choosing date");
+					
+					System.out.println(message.getMapRepresentation().get("text")); //which room
+					
+					Map<String, Object> dateTrackingData = new HashMap<>();
+					dateTrackingData.put("welcome", "dateObj");
+			    	TrackingData dateTr = new TrackingData(dateTrackingData);
+					
+					response.send(new TextMessage("Please enter the date:", null, dateTr, new Integer(1)));
+					
+					
+				}
+				
 				
 			}
 			
@@ -142,6 +158,10 @@ public class ViberBotServiceImpl implements ViberBotService {
         	
     		
     	}
+    	
+    	
+    	
+    	
     	
     	
     	
