@@ -198,22 +198,31 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 
 						 String timeSlotString = (String) message.getMapRepresentation().get("text");
 						 String roomIdString = (String) message.getTrackingData().get("RoomID");
-						 String userViberId = event.getSender().getId();
+						 //String userViberId = event.getSender().getId();
 						 String date = (String) message.getTrackingData().get("Date");
 						 
 						 Room room = roomService.getRoomById(roomIdString);
 						 
-						 System.out.println("time: " + timeSlotString + "date: " + date + "roomId: " + roomIdString + "user: " + userViberId);
+						 //System.out.println("time: " + timeSlotString + "date: " + date + "roomId: " + roomIdString + "user: " + userViberId);
 						 
 						 String reservationDetails = "Would you like to confirm your reservation?"
 						 		+ "\nROOM: " + room.getName() + " " + room.getNumber()
 						 		+ "\nDATE: " + date
 						 		+ "\nTIME: " + timeSlotString;
 						 
-						 reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
+						 //reservationService.reserve(new Reservation(userService.getByViberId(userViberId),roomService.getRoomById(roomIdString), date, timeSlotString));
 						 
+						  Map<String, Object> confirmTrackingData = new HashMap<>();
+						  confirmTrackingData.put("welcome", "confObj");
+						  confirmTrackingData.put("RoomID", roomIdString);
+						  confirmTrackingData.put("Date", date);
+						  confirmTrackingData.put("Time", timeSlotString);
+
+			              TrackingData confirmTr = new TrackingData(confirmTrackingData);
 						 
-						 response.send(new TextMessage(reservationDetails));
+						 MessageKeyboard confirmKeyboard = confirmReservationKeyboard();
+			              
+						 response.send(new TextMessage(reservationDetails,confirmKeyboard, confirmTr,new Integer(1)));
 					 }
 
 				
@@ -226,6 +235,48 @@ public class ViberBotServiceImpl implements ViberBotService {
 	
 	}
 
+    private MessageKeyboard confirmReservationKeyboard() {
+
+    	ArrayList<Map> buttonsList  = new ArrayList<>();
+    	
+    	Map<String, Object> confirmButton = new HashMap<>();
+    	confirmButton.put("Columns", "3");
+    	confirmButton.put("Rows", "2");
+    	confirmButton.put("BgColor", "#fee398");
+    	confirmButton.put("Text", "Confirm");
+    	confirmButton.put("TextVAlign", "middle");
+		confirmButton.put("TextHAlign", "center");
+		confirmButton.put("TextOpacity", "60");
+		confirmButton.put("TextSize", "regular");
+		confirmButton.put("ActionType", "reply");
+		confirmButton.put("ActionBody", "Confirm");
+		confirmButton.put("TextSize", "regular");
+    	
+		Map<String, Object> cancelButton = new HashMap<>();
+		confirmButton.put("Columns", "3");
+    	cancelButton.put("Rows", "2");
+    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("Text", "Cancel");
+    	cancelButton.put("TextVAlign", "middle");
+    	cancelButton.put("TextHAlign", "center");
+    	cancelButton.put("TextOpacity", "60");
+    	cancelButton.put("TextSize", "regular");
+    	cancelButton.put("ActionType", "reply");
+    	cancelButton.put("ActionBody", "Cancel");
+    	cancelButton.put("TextSize", "regular");
+    	
+    	buttonsList.add(confirmButton);
+    	buttonsList.add(cancelButton);
+    	
+    	Map<String, Object> keyboard  = new HashMap<>();
+    	keyboard.put("Buttons", buttonsList);
+    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("Type", "keyboard");
+    	
+    	
+    	return new MessageKeyboard(keyboard);
+    	
+    }
     
     private MessageKeyboard createRoomKeyboard() {
     	
