@@ -131,20 +131,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                System.out.println("Room is" + roomId);
 	
 
-		                Map<String, Object> timeTrackingData = new HashMap<>();
-		                timeTrackingData.put("welcome", "dateObj");
-		                timeTrackingData.put("RoomID", roomId);
+		                Map<String, Object> dateTrackingData = new HashMap<>();
+		                dateTrackingData.put("welcome", "dateObj");
+		                dateTrackingData.put("RoomID", roomId);
 
-		                TrackingData timeTr = new TrackingData(timeTrackingData);
-		                
-		                
-		                MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId));
-				    	
-				    	
-		                System.out.println("Time keyboard created");
+		                TrackingData dateTr = new TrackingData(dateTrackingData);
+		               
 
 		                
-		                response.send(new TextMessage("Please choose time:", timeKeyboard, timeTr, new Integer(1)));
+		                response.send(new TextMessage("Please choose date (yyyy-mm-dd):", null, dateTr, new Integer(1)));
 					}
 					
 				}
@@ -158,11 +153,27 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					
 					response.send("Your date is: " + resDate.toString());
+				
+					String roomId = (String) message.getTrackingData().get("RoomID");
+		
+					System.out.println("RoomID in DATE is: " + roomId);
+		
 					
-					System.out.println("RoomID in DATE is: " + message.getTrackingData().get("RoomID"));
-					
-					
-					
+					Map<String, Object> timeTrackingData = new HashMap<>();
+		            timeTrackingData.put("welcome", "timeObj");
+		            timeTrackingData.put("RoomID", roomId);
+
+		            TrackingData timeTr = new TrackingData(timeTrackingData);
+		                
+		                
+		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(Long.parseLong(roomId)));
+				    	
+				    	
+		            System.out.println("Time keyboard created");
+
+		                
+		            response.send(new TextMessage("Please choose time:", timeKeyboard, timeTr, new Integer(1)));
+				
 					
 					
 					
