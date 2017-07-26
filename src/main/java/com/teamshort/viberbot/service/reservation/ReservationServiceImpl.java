@@ -1,6 +1,7 @@
 package com.teamshort.viberbot.service.reservation;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +26,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public void edit(Reservation reservation) {
-		Reservation res = reservation;
-		//do manipulation
-		reserve(res); //??
+	public Reservation edit(Reservation reservation) {
+		return reservationRepository.save(reservation);
 	
 	}
 
@@ -38,7 +37,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public String getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date) {
+	public Iterable<LocalTime> getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date) {
 		// TODO Auto-generated method stub
 		
 		

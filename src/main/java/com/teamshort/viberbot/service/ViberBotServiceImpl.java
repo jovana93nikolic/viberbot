@@ -49,6 +49,7 @@ import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
 import com.viber.bot.message.Message;
 import com.viber.bot.message.MessageKeyboard;
+import com.teamshort.viberbot.service.reservation.ReservationService;
 import com.teamshort.viberbot.service.room.RoomService;
 //import com.teamshort.viberbot.message.MessageKeyboard;
 import com.teamshort.viberbot.service.user.UserService;
@@ -66,6 +67,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 
     @Autowired
     private RoomService roomService;
+    
+    @Autowired
+    private ReservationService reservationService;
+    
     
     @Override
 	public void onMessageReceived(ViberBot bot) {
@@ -168,7 +173,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		            TrackingData timeTr = new TrackingData(timeTrackingData);
 		                
-		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId));
+		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId), dateStr);
 				    	
 				    	
 		            System.out.println("Time keyboard created");
@@ -265,10 +270,16 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     }
     
-    private MessageKeyboard createTimeKeyboard(Room room) {
+    private MessageKeyboard createTimeKeyboard(Room room, String date) {
     	
     	System.out.println("IN createTimeKeyboard");
+    	
+    	Iterable<LocalTime> availableTimes = reservationService.getFreeRoomCapacitiesOnDate(room.getId(), LocalDate.parse(date));
     
+    	for(LocalTime time: availableTimes) {
+    		System.out.println(time);
+    	}
+    	
     	ArrayList<Map> buttonsList  = new ArrayList<>();
     	LocalTime time = room.getStartWorkTime();
     	LocalTime endTime = room.getEndWorkTime();
