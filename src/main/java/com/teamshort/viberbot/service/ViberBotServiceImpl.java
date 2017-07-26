@@ -204,7 +204,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 System.out.println("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId);
 						 
 						 Map<String, Object> confTrackingData = new HashMap<>();
-				         confTrackingData.put("welcome", "timeObj");
+				         confTrackingData.put("welcome", "confObj");
 				         confTrackingData.put("Time", timeSlotString);
 				         confTrackingData.put("Date", dateStr);
 				         confTrackingData.put("RoomID", roomIdString);
@@ -220,9 +220,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 
 					 }
 
-				
-				
-				
+				}
+					//user enters the time
+						else if(message.getTrackingData().get("welcome").equals("confObj")) {
+							
+							response.send("You have successfully confirmed your reservation!");
+							
+							response.send(welcomeScreen(event.getSender().getName()));
+							
+							
 			}
 			}
 			
