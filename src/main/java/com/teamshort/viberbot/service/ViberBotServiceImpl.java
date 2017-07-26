@@ -119,9 +119,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		                Long roomId = Long.parseLong((String)message.getMapRepresentation().get("text")); //which room
 
-		                roomService.getRoomById(roomId);
+		                //roomService.getRoomById(roomId);
 
-		                response.send("You want to reserve room" + roomService.getRoomById(roomId).getName());
+		                //response.send("You want to reserve room" + roomService.getRoomById(roomId).getName());
 
 		                Map<String, Object> dateTrackingData = new HashMap<>();
 		                dateTrackingData.put("welcome", "dateObj");
