@@ -43,7 +43,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public Reservation getByUser(String viberId) {
-		return reservationRepository.getByUser(viberId);
+		//return reservationRepository.getByUser(viberId);
+		return null;
 	}
 	
 	
