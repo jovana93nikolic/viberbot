@@ -127,10 +127,11 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		                Map<String, Object> dateTrackingData = new HashMap<>();
 		                dateTrackingData.put("welcome", "dateObj");
+		                dateTrackingData.put("RoomID", roomId);
+
 		                TrackingData dateTr = new TrackingData(dateTrackingData);
 
-		                //dateTr.put("RoomID", roomId);
-
+		                
 		                response.send(new TextMessage("Please enter the date: (yyyy-mm-dd)", null, dateTr, new Integer(1)));
 					
 					
@@ -145,6 +146,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					
 					response.send("Your date is: " + resDate.toString());
+					
+					System.out.println("RoomID in DATE is: " + message.getTrackingData().get("RoomID"));
 
 				}
 				
