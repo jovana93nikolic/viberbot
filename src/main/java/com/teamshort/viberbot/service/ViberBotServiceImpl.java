@@ -279,7 +279,7 @@ public class ViberBotServiceImpl implements ViberBotService {
         	
         	buttonsList.add(timeButton);
         	
-        	time.plusHours(1);
+        	time = time.plusHours(1);
         	
     		
     	}
