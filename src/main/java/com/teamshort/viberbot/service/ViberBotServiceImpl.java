@@ -175,19 +175,33 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		                
 		            response.send(new TextMessage("Please choose time:", timeKeyboard, timeTr, new Integer(1)));
-				
-					
-					
 					
 				}
 				
 				
-				
+				//user enters the time
+				else if(message.getTrackingData().get("welcome").equals("timeObj")) {
+					 if(message.getMapRepresentation().get("text").equals("Cancel")){
+						 System.out.println("In Cancel");   
+						 response.send(welcomeScreen(event.getSender().getName()));
+					
+						 
+		                    }
+					 else {
+						 String timeSlotString = (String) message.getMapRepresentation().get("text");
+						 String roomIdString = (String) message.getMapRepresentation().get("RoomID");
+						 String userViberId = event.getSender().getId();
+						 
+						 System.out.println("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId);
+						 
+						 response.send(new TextMessage("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId));
+					 }
+
 				
 				
 				
 			}
-			
+			}
 			
 		});
 	
