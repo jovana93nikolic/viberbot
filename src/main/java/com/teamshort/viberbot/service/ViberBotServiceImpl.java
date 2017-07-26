@@ -117,6 +117,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 						welcomeScreen(event);
 						 
 		                    }
+					 else {
 
 
 		                System.out.println("In choosing date");
@@ -137,7 +138,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		                
 		                response.send(new TextMessage("Please enter the date: (yyyy-mm-dd)", null, dateTr, new Integer(1)));
-					
+					}
 					
 				}
 				
