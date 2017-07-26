@@ -14,6 +14,7 @@ import com.viber.bot.event.incoming.IncomingUnsubscribeEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -128,10 +129,26 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		                dateTr.put("RoomID", roomId);
 
-		                response.send(new TextMessage("Please enter the date:", null, dateTr, new Integer(1)));
+		                response.send(new TextMessage("Please enter the date: (yyyy-mm-dd)", null, dateTr, new Integer(1)));
 					
 					
 				}
+				
+				//user enters the date
+				if(message.getTrackingData().get("welcome").equals("dateObj")) {
+					
+					String dateStr = (String) message.getMapRepresentation().get("text");
+
+					LocalDate resDate = LocalDate.parse(dateStr);
+					
+					
+					response.send("Your date is: " + resDate.toString());
+
+				}
+				
+				
+				
+				
 				
 				
 			}
