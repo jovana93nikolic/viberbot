@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -37,9 +38,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.google.common.io.CharStreams;
 import com.google.common.util.concurrent.Futures;
+import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
 import com.viber.bot.message.Message;
 import com.viber.bot.message.MessageKeyboard;
+import com.teamshort.viberbot.service.room.RoomService;
 //import com.teamshort.viberbot.message.MessageKeyboard;
 import com.teamshort.viberbot.service.user.UserService;
 import com.viber.bot.message.TextMessage;
@@ -51,12 +54,11 @@ import aj.org.objectweb.asm.TypeReference;
 @Service
 public class ViberBotServiceImpl implements ViberBotService {
 
+    @Autowired
 	private UserService userService;
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
+    private RoomService roomService;
     
     @Override
 	public void onMessageReceived(ViberBot bot) {
@@ -72,13 +74,35 @@ public class ViberBotServiceImpl implements ViberBotService {
 				
 				if(message.getTrackingData().get("welcome").equals("welcomeObj")){
 					System.out.println("In Welcome");
+					
+					
+					//user wants to reserve a room
 					if(message.getMapRepresentation().get("text").equals("Reserve room")){
 						System.out.println("In Reserve room");
-						response.send("You want to reserve a room!");}
+						response.send("You want to reserve a room!");
+						
+						
+
+				    	Map<String, Object> roomsTrackingData = new HashMap<>();
+				    	roomsTrackingData.put("welcome", "roomsObj");
+				    	TrackingData roomsTr = new TrackingData(roomsTrackingData);
+				    	
+				    	MessageKeyboard roomsKeyboard = createRoomKeyboard();
+				    	
+				    	
+				    	response.send(new TextMessage("Please choose one of the available rooms:", roomsKeyboard
+								, roomsTr, new Integer(1)));
+				    	
+					
+					
+					}
+					
+					
+					
+					//user wants to previous reservations
 					else if(message.getMapRepresentation().get("text").equals("See previous reservations")){
 						System.out.println("In Previous reservations");
-						response.send("You want to see previous reservations!");}
-					
+						response.send("You want to see previous reservations!");}	
 					
 				}
 				
@@ -90,6 +114,48 @@ public class ViberBotServiceImpl implements ViberBotService {
 		
 		
 	}
+    
+    
+    private MessageKeyboard createRoomKeyboard() {
+    	
+    	List<Room> rooms = (List<Room>) roomService.listAllRooms();
+    	
+    	
+    	ArrayList<Map> buttonsList  = new ArrayList<>();
+    	
+    	
+    	for (Room room: rooms){
+    		
+    		Map<String, Object> roomButton = new HashMap<>();
+    		roomButton.put("Rows", "1");
+    		roomButton.put("BgColor", "#fee398");
+    		roomButton.put("Text", room.getName() + " " + room.getNumber());
+    		roomButton.put("TextVAlign", "middle");
+    		roomButton.put("TextHAlign", "center");
+        	roomButton.put("TextOpacity", "60");
+        	roomButton.put("TextSize", "regular");
+        	roomButton.put("ActionType", "reply");
+        	roomButton.put("ActionBody", room.getId());
+        	roomButton.put("TextSize", "regular");
+        	
+        	buttonsList.add(roomButton);
+        	
+    		
+    	}
+    	
+    	
+    	
+    	Map<String, Object> keyboard  = new HashMap<>();
+    	keyboard.put("Buttons", buttonsList);
+    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("Type", "keyboard");
+    	
+    	
+    	return new MessageKeyboard(keyboard);
+    	
+    }
+    
+    
     
 	@Override
 	public void subscribe(ViberBot bot) {
@@ -143,16 +209,9 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	
     	Map<String, Object> button1  = new HashMap<>();
-    	//button1.put("Type", "keyboard");
     	button1.put("Columns", "3");
     	button1.put("Rows", "2");
     	button1.put("BgColor", "#fee398");
-//    	button1.put("BgMediaType", "picture");
-//    	button1.put("BgMedia", "http://www.url.by/test.gif");
-//    	button1.put("BgLoop", "true");
-//    	button1.put("ActionType", "open-url");
-//    	button1.put("ActionBody", "www.tut.by");
-//    	button1.put("Image", "www.tut.by/img.jpg");
     	button1.put("Text", "Reserve room");
     	button1.put("TextVAlign", "middle");
     	button1.put("TextHAlign", "center");
@@ -165,16 +224,9 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	
     	Map<String, Object> button2  = new HashMap<>();
-    	//button2.put("Type", "keyboard");
     	button2.put("Columns", "3");
     	button2.put("Rows", "2");
     	button2.put("BgColor", "#c6e2ff");
-//    	button2.put("BgMediaType", "picture");
-//    	button2.put("BgMedia", "http://www.url.by/test.gif");
-//    	button2.put("BgLoop", "true");
-//    	button2.put("ActionType", "open-url");
-//    	button2.put("ActionBody", "www.tut.by");
-//    	button2.put("Image", "www.tut.by/img.jpg");
     	button2.put("Text", "See previous reservations");
     	button2.put("TextVAlign", "middle");
     	button2.put("TextHAlign", "center");
