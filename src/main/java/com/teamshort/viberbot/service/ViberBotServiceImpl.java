@@ -108,15 +108,25 @@ public class ViberBotServiceImpl implements ViberBotService {
 				//from get available rooms to enter date
 				if(message.getTrackingData().get("welcome").equals("roomsObj")){
 					
-					System.out.println("In choosing date");
-					
-					System.out.println(message.getMapRepresentation().get("text")); //which room
-					
-					Map<String, Object> dateTrackingData = new HashMap<>();
-					dateTrackingData.put("welcome", "dateObj");
-			    	TrackingData dateTr = new TrackingData(dateTrackingData);
-					
-					response.send(new TextMessage("Please enter the date:", null, dateTr, new Integer(1)));
+					 if(message.getMapRepresentation().get("text").equals("Cancel"))
+		                    onConversationStarted(bot);
+
+
+		                System.out.println("In choosing date");
+
+		                Long roomId = (Long) message.getMapRepresentation().get("text"); //which room
+
+		                roomService.getRoomById(roomId);
+
+		                response.send("You want to reserve room" + roomService.getRoomById(roomId).getName());
+
+		                Map<String, Object> dateTrackingData = new HashMap<>();
+		                dateTrackingData.put("welcome", "dateObj");
+		                TrackingData dateTr = new TrackingData(dateTrackingData);
+
+		                dateTr.put("RoomID", roomId);
+
+		                response.send(new TextMessage("Please enter the date:", null, dateTr, new Integer(1)));
 					
 					
 				}
