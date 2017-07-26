@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -128,19 +129,22 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                Long roomId = Long.parseLong((String)message.getMapRepresentation().get("text")); //which room
 		                	
 		                System.out.println("Room is" + roomId);
+	
+
+		                Map<String, Object> timeTrackingData = new HashMap<>();
+		                timeTrackingData.put("welcome", "dateObj");
+		                timeTrackingData.put("RoomID", roomId);
+
+		                TrackingData timeTr = new TrackingData(timeTrackingData);
 		                
-		                //roomService.getRoomById(roomId);
-
-		                //response.send("You want to reserve room" + roomService.getRoomById(roomId).getName());
-
-		                Map<String, Object> dateTrackingData = new HashMap<>();
-		                dateTrackingData.put("welcome", "dateObj");
-		                dateTrackingData.put("RoomID", roomId);
-
-		                TrackingData dateTr = new TrackingData(dateTrackingData);
+		                
+		                MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId));
+				    	
+				    	
+		                System.out.println("Time keyboard created");
 
 		                
-		                response.send(new TextMessage("Please enter the date: (yyyy-mm-dd)", null, dateTr, new Integer(1)));
+		                response.send(new TextMessage("Please choose time:", timeKeyboard, timeTr, new Integer(1)));
 					}
 					
 				}
@@ -156,7 +160,12 @@ public class ViberBotServiceImpl implements ViberBotService {
 					response.send("Your date is: " + resDate.toString());
 					
 					System.out.println("RoomID in DATE is: " + message.getTrackingData().get("RoomID"));
-
+					
+					
+					
+					
+					
+					
 				}
 				
 				
@@ -168,11 +177,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 			
 			
 		});
-		
-		
-		
+	
 	}
-    
+
     
     private MessageKeyboard createRoomKeyboard() {
     	
@@ -231,6 +238,59 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     }
     
+    private MessageKeyboard createTimeKeyboard(Room room) {
+    
+    	ArrayList<Map> buttonsList  = new ArrayList<>();
+    	LocalTime time = room.getStartWorkTime();
+    	LocalTime endTime = room.getEndWorkTime();
+    	
+    	
+    	
+    	while (time.isBefore(endTime)) {
+    		
+    		Map<String, Object> timeButton = new HashMap<>();
+    		timeButton.put("Rows", "1");
+    		timeButton.put("BgColor", "#fee398");
+    		timeButton.put("Text", time.toString());
+    		timeButton.put("TextVAlign", "middle");
+    		timeButton.put("TextHAlign", "center");
+    		timeButton.put("TextOpacity", "60");
+    		timeButton.put("TextSize", "regular");
+    		timeButton.put("ActionType", "reply");
+    		timeButton.put("ActionBody", time.toString());
+    		timeButton.put("TextSize", "regular");
+        	
+        	buttonsList.add(timeButton);
+        	
+        	time.plusHours(1);
+        	
+    		
+    	}
+    	
+    	Map<String, Object> cancelButton = new HashMap<>();
+    	cancelButton.put("Rows", "1");
+    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("Text", "Cancel");
+    	cancelButton.put("TextVAlign", "middle");
+    	cancelButton.put("TextHAlign", "center");
+    	cancelButton.put("TextOpacity", "60");
+    	cancelButton.put("TextSize", "regular");
+    	cancelButton.put("ActionType", "reply");
+    	cancelButton.put("ActionBody", "Cancel");
+    	cancelButton.put("TextSize", "regular");
+    	
+    	buttonsList.add(cancelButton);
+    
+    	
+    	Map<String, Object> keyboard  = new HashMap<>();
+    	keyboard.put("Buttons", buttonsList);
+    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("Type", "keyboard");
+    	
+    	
+    	return new MessageKeyboard(keyboard);
+    	
+    }
     
     
 	@Override
