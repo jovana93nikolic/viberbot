@@ -154,7 +154,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					response.send("Your date is: " + resDate.toString());
 				
-					Long roomId = Long.parseLong((String) message.getTrackingData().get("RoomID"));
+					String roomId = (String) message.getTrackingData().get("RoomID");
 		
 					System.out.println("RoomID in DATE is: " + roomId);
 		
@@ -188,6 +188,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 
 		                    }
 					 else {
+						 
 						 String timeSlotString = (String) message.getMapRepresentation().get("text");
 						 String roomIdString = (String) message.getMapRepresentation().get("RoomID");
 						 String userViberId = event.getSender().getId();
