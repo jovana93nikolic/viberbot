@@ -143,6 +143,20 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     	}
     	
+    	Map<String, Object> cancelButton = new HashMap<>();
+    	cancelButton.put("Rows", "1");
+    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("Text", "Cancel");
+    	cancelButton.put("TextVAlign", "middle");
+    	cancelButton.put("TextHAlign", "center");
+    	cancelButton.put("TextOpacity", "60");
+    	cancelButton.put("TextSize", "regular");
+    	cancelButton.put("ActionType", "reply");
+    	cancelButton.put("ActionBody", "Cancel");
+    	cancelButton.put("TextSize", "regular");
+    	
+    	buttonsList.add(cancelButton);
+    	
     	
     	
     	Map<String, Object> keyboard  = new HashMap<>();
