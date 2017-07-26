@@ -38,10 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public Iterable<LocalTime> getFreeRoomCapacitiesOnDate(Long roomId, LocalDate date) {
-		// TODO Auto-generated method stub
-		
-		
-		
+		//return reservationRepository.getFreeRoomCapacitiesOnDate(roomId, date);
 		return null;
 	}
 

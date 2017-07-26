@@ -43,11 +43,11 @@ public class Reservation implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	
-	@JoinColumn(name = "room")	
+	@JoinColumn(name = "room_id")	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private Room room;
 	
-	@JoinColumn(name = "user")	
+	@JoinColumn(name = "user_id")	
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private User user;
 	

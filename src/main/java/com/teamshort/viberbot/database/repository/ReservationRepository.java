@@ -11,7 +11,7 @@ import com.teamshort.viberbot.database.entity.Reservation;
 
 public interface ReservationRepository extends CrudRepository<Reservation, Long>{
 
-	@Query("select time from Reservation where room.id = :roomId and date = :date")
-	public Iterable<LocalTime> getFreeRoomCapacitiesOnDate(@Param("roomId") Long roomId, @Param("date") LocalDate date);
+	//@Query("select time from Reservation r where r.room.id = :roomId and r.date = :date")
+	//public Iterable<LocalTime> getFreeRoomCapacitiesOnDate(@Param("roomId") Long roomId, @Param("date") LocalDate date);
 	
 }
