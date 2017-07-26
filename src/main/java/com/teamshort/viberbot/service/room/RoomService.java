@@ -33,6 +33,7 @@ These functions should be used for Room entity maninupulation inside app
 
     void deleteRoom(Long id);
 	
+    public Room getRoomById(String id);
 	
 	
 }

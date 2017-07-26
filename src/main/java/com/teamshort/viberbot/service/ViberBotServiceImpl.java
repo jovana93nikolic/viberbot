@@ -162,9 +162,11 @@ public class ViberBotServiceImpl implements ViberBotService {
 					Map<String, Object> timeTrackingData = new HashMap<>();
 		            timeTrackingData.put("welcome", "timeObj");
 		            timeTrackingData.put("RoomID", roomId);
+		            
+					System.out.println("Time tracking Data HASHMAP created");
+
 
 		            TrackingData timeTr = new TrackingData(timeTrackingData);
-		                
 		                
 		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId));
 				    	
@@ -250,14 +252,18 @@ public class ViberBotServiceImpl implements ViberBotService {
     }
     
     private MessageKeyboard createTimeKeyboard(Room room) {
+    	
+    	System.out.println("IN createTimeKeyboard");
     
     	ArrayList<Map> buttonsList  = new ArrayList<>();
     	LocalTime time = room.getStartWorkTime();
     	LocalTime endTime = room.getEndWorkTime();
     	
-    	
+    	System.out.println("time is: " + time + " endTime is: " + endTime);
     	
     	while (time.isBefore(endTime)) {
+    		
+    		System.out.println("time is: " + time + " endTime is: " + endTime);
     		
     		Map<String, Object> timeButton = new HashMap<>();
     		timeButton.put("Rows", "1");

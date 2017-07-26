@@ -48,6 +48,14 @@ public class RoomServiceImpl implements RoomService {
 	    public Room getRoomById(Long id) {
 	        return roomRepository.findOne(id);
 	    }
+	    
+
+	    @Override
+	    public Room getRoomById(String id) {
+	        return roomRepository.findOne(Long.parseLong(id));
+	    }
+	    
+	    
 
 	    @Override
 	    public Room saveRoom(Room room) {
