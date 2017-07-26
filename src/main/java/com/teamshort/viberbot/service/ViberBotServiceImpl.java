@@ -129,7 +129,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                dateTrackingData.put("welcome", "dateObj");
 		                TrackingData dateTr = new TrackingData(dateTrackingData);
 
-		                dateTr.put("RoomID", roomId);
+		                //dateTr.put("RoomID", roomId);
 
 		                response.send(new TextMessage("Please enter the date: (yyyy-mm-dd)", null, dateTr, new Integer(1)));
 					
