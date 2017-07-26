@@ -48,6 +48,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.teamshort.viberbot.database.entity.Reservation;
 import com.teamshort.viberbot.database.entity.Room;
 import com.teamshort.viberbot.database.entity.User;
+import com.teamshort.viberbot.database.repository.ReservationRepository;
 import com.viber.bot.message.Message;
 import com.viber.bot.message.MessageKeyboard;
 import com.teamshort.viberbot.service.reservation.ReservationService;
@@ -123,13 +124,41 @@ public class ViberBotServiceImpl implements ViberBotService {
 				    	MessageKeyboard reservationsKeyboard = createReservationsKeyboard(event.getSender().getId());
 				    	
 				    	
-				    	response.send(new TextMessage("Please choose one of the available rooms:", reservationsKeyboard
+				    	response.send(new TextMessage("Please choose a reservation for more details:", reservationsKeyboard
 								, reservationsTr, new Integer(1)));
 					
+					}
 					
+					//user chooses a reservation
+					else if(message.getTrackingData().get("welcome").equals("reservationObj")) {
+						String resId = (String) message.getMapRepresentation().get("Text");
+								
+						
+						Map<String, Object> resDelTrackingData = new HashMap<>();
+				    	resDelTrackingData.put("welcome", "resDelObj");
+				    	resDelTrackingData.put("resId", resId);
+				    	TrackingData resDelTr = new TrackingData(resDelTrackingData);
+				    	
+				    	MessageKeyboard cancelResKeyboard = cancelResKeyboard();
+				    	
+				    	response.send(new TextMessage("Please choose one of the options below:", cancelResKeyboard
+								, resDelTr, new Integer(1)));
+						
+						
+					}
 					
+					else if(message.getTrackingData().get("welcome").equals("reservationObj")) {
+						if(message.getMapRepresentation().get("Text").equals("Cancel reservation")) {
+							reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
+							response.send(new TextMessage("You have canceled your reservation!"));
+						}
+						else if(message.getMapRepresentation().get("Text").equals("Cancel")) {
+							 response.send(welcomeScreen(event.getSender().getName()));
+						
+						}
 					
-					}	
+					}
+					
 					
 				}
 				
@@ -269,7 +298,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     		Map<String, Object> resButton = new HashMap<>();
     		resButton.put("Rows", "1");
-    		resButton.put("BgColor", "#fee398");
+    		resButton.put("BgColor", "#c6e2ff");
     		resButton.put("Text", res.toString());
     		resButton.put("TextVAlign", "middle");
     		resButton.put("TextHAlign", "center");
@@ -363,6 +392,52 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	
     	return new MessageKeyboard(keyboard);
+    	
+    }
+    
+    private MessageKeyboard cancelResKeyboard() {
+    	
+    	ArrayList<Map> buttonsList  = new ArrayList<>();
+        
+		
+		Map<String, Object> cancelRes = new HashMap<>();
+		cancelRes.put("Rows", "1");
+		cancelRes.put("BgColor", "#fee398");
+		cancelRes.put("Text", "Cancel Reservation");
+		cancelRes.put("TextVAlign", "middle");
+		cancelRes.put("TextHAlign", "center");
+		cancelRes.put("TextOpacity", "60");
+		cancelRes.put("TextSize", "regular");
+		cancelRes.put("ActionType", "reply");
+		cancelRes.put("ActionBody", "Cancel Reservation");
+		cancelRes.put("TextSize", "regular");
+    	
+    	buttonsList.add(cancelRes);
+    	
+	
+	Map<String, Object> cancelButton = new HashMap<>();
+	cancelButton.put("Rows", "1");
+	cancelButton.put("BgColor", "#CD3E2D");
+	cancelButton.put("Text", "Cancel");
+	cancelButton.put("TextVAlign", "middle");
+	cancelButton.put("TextHAlign", "center");
+	cancelButton.put("TextOpacity", "60");
+	cancelButton.put("TextSize", "regular");
+	cancelButton.put("ActionType", "reply");
+	cancelButton.put("ActionBody", "Cancel");
+	cancelButton.put("TextSize", "regular");
+	
+	buttonsList.add(cancelButton);	
+	
+	Map<String, Object> keyboard  = new HashMap<>();
+	keyboard.put("Buttons", buttonsList);
+	keyboard.put("DefaultHeight", true);
+	keyboard.put("Type", "keyboard");
+	
+	
+	return new MessageKeyboard(keyboard);
+
+    	
     	
     }
     
