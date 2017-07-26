@@ -6,10 +6,10 @@
     <style media="screen">
     body {
         background-color: #F9F9F9;
-        background-image: url("https://s-media-cache-ak0.pinimg.com/originals/2b/0f/0f/2b0f0fb7dd3ad0cc2d3f8d1c7e82d294.jpg");
+        background-image: url("https://s-media-cache-ak0.pinimg.com/originals/14/22/07/142207cfb41addee27b138fa7b7638d0.jpg");
         background-position: center top;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: fit;
        
     }
 </style>
@@ -26,9 +26,9 @@
 
     <h2>Room Details</h2>
         <div>
-            <table class="table table-striped">
+            <table class="table table-bordered">
             <thead>
-            <tr>
+            <tr class="info">
                 
                 <th>Name</th>
                 <th>Number</th>
@@ -39,7 +39,7 @@
                
             </tr>
             </thead>
-            <tr>
+            <tr class="active">
             <body>
                 <td th:text="${room.name}">Name</td>
                 <td th:text="${room.number}">Number</td>
