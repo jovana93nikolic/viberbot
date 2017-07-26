@@ -173,7 +173,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                
 		            System.out.println("RoomID in TIMEE before keyboard:" + timeTr.get(roomId));
 		            
-		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId));
+		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId), LocalDate.parse(dateStr));
 				    	
 				    	
 		            System.out.println("Time keyboard created");
@@ -360,35 +360,37 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     }
     
-    private MessageKeyboard createTimeKeyboard(Room room) {
+    private MessageKeyboard createTimeKeyboard(Room room, LocalDate date) {
     	
     	System.out.println("IN createTimeKeyboard");
+    	
+    	Iterable<LocalTime> availableSlots = reservationService.getFreeRoomCapacitiesOnDate(room.getId(), date);
+    	
     
     	ArrayList<Map> buttonsList  = new ArrayList<>();
-    	LocalTime time = room.getStartWorkTime();
-    	LocalTime endTime = room.getEndWorkTime();
+    	//LocalTime time = room.getStartWorkTime();
+    	//LocalTime endTime = room.getEndWorkTime();
     	
-    	System.out.println("time is: " + time + " endTime is: " + endTime);
+    	//System.out.println("time is: " + time + " endTime is: " + endTime);
     	
-    	while (time.isBefore(endTime)) {
+    	for (LocalTime slot: availableSlots) {
     		
-    		System.out.println("time is: " + time + " endTime is: " + endTime);
+    		System.out.println("time is: " + slot);
     		
     		Map<String, Object> timeButton = new HashMap<>();
     		timeButton.put("Rows", "1");
     		timeButton.put("BgColor", "#fee398");
-    		timeButton.put("Text", time.toString());
+    		timeButton.put("Text", slot.toString());
     		timeButton.put("TextVAlign", "middle");
     		timeButton.put("TextHAlign", "center");
     		timeButton.put("TextOpacity", "60");
     		timeButton.put("TextSize", "regular");
     		timeButton.put("ActionType", "reply");
-    		timeButton.put("ActionBody", time.toString());
+    		timeButton.put("ActionBody", slot.toString());
     		timeButton.put("TextSize", "regular");
         	
         	buttonsList.add(timeButton);
         	
-        	time = time.plusHours(1);
         	
     		
     	}
