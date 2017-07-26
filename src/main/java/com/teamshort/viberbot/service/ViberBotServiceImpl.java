@@ -171,7 +171,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 		            TrackingData timeTr = new TrackingData(timeTrackingData);
 		                
-		            System.out.println("RoomID in TIMEE before keyboard:" + timeTr.get(roomId));
+		            System.out.println("RoomID in TIMEE before keyboard:" + timeTr.get("RoomID"));
 		            
 		            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId), LocalDate.parse(dateStr));
 				    	
@@ -362,7 +362,11 @@ public class ViberBotServiceImpl implements ViberBotService {
     
     private MessageKeyboard createTimeKeyboard(Room room, LocalDate date) {
     	
+    	
+    	
     	System.out.println("IN createTimeKeyboard");
+    	
+    	System.out.println("Rooom is " + room.toString());
     	
     	Iterable<LocalTime> availableSlots = reservationService.getFreeRoomCapacitiesOnDate(room.getId(), date);
     	
