@@ -68,7 +68,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 			public void messageReceived(IncomingMessageEvent event, Message message, Response response) {
 				
 				
-				System.out.println("In MessageReceived");
+				System.out.println(message.getMapRepresentation().get("text"));
+				
 				if(message.getTrackingData().get("welcome").equals("welcomeObj")){
 					System.out.println("In Welcome");
 					if(message.getMapRepresentation().get("text").equals("Reserve room")){
