@@ -133,12 +133,12 @@ public class ViberBotServiceImpl implements ViberBotService {
 						
 						System.out.println("To cancel or not to cancel");
 						
-						if(message.getMapRepresentation().get("Text").equals("Cancel")) {
-							 response.send(welcomeScreen(event.getSender().getName()));
+						//if(message.getMapRepresentation().get("Text").equals("Cancel")) {
+						//	 response.send(welcomeScreen(event.getSender().getName()));
 						
-						}
+						//}
 						
-						else {
+						
 						System.out.println("We get into reservations to cancel");
 						
 						String resId = (String) message.getMapRepresentation().get("Text");
@@ -157,11 +157,11 @@ public class ViberBotServiceImpl implements ViberBotService {
 				    	response.send(new TextMessage("Please choose one of the options below:", cancelResKeyboard
 								, resDelTr, new Integer(1)));
 						
-						}
+						
 					}
 					
 					else if(message.getTrackingData().get("welcome").equals("resDelObj")) {
-						if(message.getMapRepresentation().get("Text").equals("Cancel reservation")) {
+						if(message.getMapRepresentation().get("Text").equals("Cancel Reservation")) {
 							reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
 							response.send(new TextMessage("You have canceled your reservation!"));
 							response.send(welcomeScreen(event.getSender().getName()));
