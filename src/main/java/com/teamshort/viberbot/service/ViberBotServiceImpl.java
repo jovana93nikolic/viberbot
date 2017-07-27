@@ -132,15 +132,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 						
 						System.out.println("To cancel or not to cancel");
 						
-						//if(message.getMapRepresentation().get("Text").equals("Cancel")) {
-						//	 response.send(welcomeScreen(event.getSender().getName()));
+						if(message.getMapRepresentation().get("text").equals("Cancel")) {
+							 response.send(welcomeScreen(event.getSender().getName()));
 						
-						//}
+						}
 						
 						
 						System.out.println("We get into reservations to cancel");
 						System.out.println(message);
-						String resId = (String) message.getMapRepresentation().get("Text");
+						String resId = (String) message.getMapRepresentation().get("text");
 								
 						
 						Map<String, Object> resDelTrackingData = new HashMap<>();
@@ -168,13 +168,13 @@ public class ViberBotServiceImpl implements ViberBotService {
 						System.out.println("In RESDELOBJ resID is " + message.getTrackingData().get("resId"));
 											
 						
-						if(message.getMapRepresentation().get("Text").equals("CancelReservation")) {
+						if(message.getMapRepresentation().get("text").equals("CancelReservation")) {
 							reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
 							response.send(new TextMessage("You have canceled your reservation!"));
 							response.send(welcomeScreen(event.getSender().getName()));
 							
 						}
-						else if(message.getMapRepresentation().get("Text").equals("Cancel")) {
+						else if(message.getMapRepresentation().get("text").equals("Cancel")) {
 							 response.send(welcomeScreen(event.getSender().getName()));
 						
 						}
