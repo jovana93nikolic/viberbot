@@ -132,10 +132,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 						
 						System.out.println("To cancel or not to cancel");
 						
-						if(message.getMapRepresentation().get("Text").equals("Cancel")) {
-							 response.send(welcomeScreen(event.getSender().getName()));
+						//if(message.getMapRepresentation().get("Text").equals("Cancel")) {
+						//	 response.send(welcomeScreen(event.getSender().getName()));
 						
-						}
+						//}
 						
 						
 						System.out.println("We get into reservations to cancel");
