@@ -229,7 +229,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					LocalDate resDate = LocalDate.parse(dateStr);
 					
 					
-					response.send("Your date is: " + resDate.toString());
+					//response.send("Your date is: " + resDate.toString());
 				
 					String roomId = (String) message.getTrackingData().get("RoomID");
 		
@@ -348,7 +348,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("BgColor", "#ffffff");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -385,7 +385,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     		Map<String, Object> roomButton = new HashMap<>();
     		roomButton.put("Rows", "1");
-    		roomButton.put("BgColor", "#fee398");
+    		roomButton.put("BgColor", "#FFBAD2");
     		roomButton.put("Text", room.getName() + " " + room.getNumber());
     		roomButton.put("TextVAlign", "middle");
     		roomButton.put("TextHAlign", "center");
@@ -402,7 +402,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("BgColor", "#ffffff");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -437,7 +437,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		
 		Map<String, Object> cancelRes = new HashMap<>();
 		cancelRes.put("Rows", "1");
-		cancelRes.put("BgColor", "#fee398");
+		cancelRes.put("BgColor", "#FFBAD2");
 		cancelRes.put("Text", "Cancel Reservation");
 		cancelRes.put("TextVAlign", "middle");
 		cancelRes.put("TextHAlign", "center");
@@ -452,7 +452,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 	
 	Map<String, Object> cancelButton = new HashMap<>();
 	cancelButton.put("Rows", "1");
-	cancelButton.put("BgColor", "#CD3E2D");
+	cancelButton.put("BgColor", "#ffffff");
 	cancelButton.put("Text", "Cancel");
 	cancelButton.put("TextVAlign", "middle");
 	cancelButton.put("TextHAlign", "center");
@@ -483,7 +483,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     		Map<String, Object> confButton = new HashMap<>();
     		confButton.put("Rows", "1");
-    		confButton.put("BgColor", "#fee398");
+    		confButton.put("BgColor", "#FFBAD2");
     		confButton.put("Text", "Confirm");
     		confButton.put("TextVAlign", "middle");
     		confButton.put("TextHAlign", "center");
@@ -500,7 +500,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("BgColor", "#ffffff");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -553,7 +553,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		if (!notavAilableTimes.contains(time)) {
     		Map<String, Object> timeButton = new HashMap<>();
     		timeButton.put("Rows", "1");
-    		timeButton.put("BgColor", "#fee398");
+    		timeButton.put("BgColor", "#FFBAD2");
     		timeButton.put("Text", time.toString());
     		timeButton.put("TextVAlign", "middle");
     		timeButton.put("TextHAlign", "center");
@@ -572,7 +572,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#CD3E2D");
+    	cancelButton.put("BgColor", "#ffffff");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -641,7 +641,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		Map<String, Object> button1  = new HashMap<>();
     	button1.put("Columns", "3");
     	button1.put("Rows", "2");
-    	button1.put("BgColor", "#fee398");
+    	button1.put("BgColor", "#FFBAD2");
     	button1.put("Text", "Reserve room");
     	button1.put("TextVAlign", "middle");
     	button1.put("TextHAlign", "center");
