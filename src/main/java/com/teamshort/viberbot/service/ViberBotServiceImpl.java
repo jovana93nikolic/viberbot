@@ -354,7 +354,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     		Map<String, Object> resButton = new HashMap<>();
     		resButton.put("Rows", "1");
-    		resButton.put("BgColor", "#c6e2ff");
+    		resButton.put("BgColor", "#BC86AF");
     		resButton.put("Text", resString);
     		resButton.put("TextVAlign", "middle");
     		resButton.put("TextHAlign", "center");
@@ -372,7 +372,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#ffffff");
+    	cancelButton.put("BgColor", "#DDC2D7");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -409,7 +409,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     		Map<String, Object> roomButton = new HashMap<>();
     		roomButton.put("Rows", "1");
-    		roomButton.put("BgColor", "#FFBAD2");
+    		roomButton.put("BgColor", "#770B5E");
     		roomButton.put("Text", room.getName() + " " + room.getNumber());
     		roomButton.put("TextVAlign", "middle");
     		roomButton.put("TextHAlign", "center");
@@ -426,7 +426,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#ffffff");
+    	cancelButton.put("BgColor", "#DDC2D7");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -461,7 +461,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		
 		Map<String, Object> cancelRes = new HashMap<>();
 		cancelRes.put("Rows", "1");
-		cancelRes.put("BgColor", "#FFBAD2");
+		cancelRes.put("BgColor", "#770B5E");
 		cancelRes.put("Text", "Cancel Reservation");
 		cancelRes.put("TextVAlign", "middle");
 		cancelRes.put("TextHAlign", "center");
@@ -476,7 +476,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 	
 	Map<String, Object> cancelButton = new HashMap<>();
 	cancelButton.put("Rows", "1");
-	cancelButton.put("BgColor", "#ffffff");
+	cancelButton.put("BgColor", "#DDC2D7");
 	cancelButton.put("Text", "Cancel");
 	cancelButton.put("TextVAlign", "middle");
 	cancelButton.put("TextHAlign", "center");
@@ -507,7 +507,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     		Map<String, Object> confButton = new HashMap<>();
     		confButton.put("Rows", "1");
-    		confButton.put("BgColor", "#FFBAD2");
+    		confButton.put("BgColor", "#770B5E");
     		confButton.put("Text", "Confirm");
     		confButton.put("TextVAlign", "middle");
     		confButton.put("TextHAlign", "center");
@@ -524,7 +524,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#ffffff");
+    	cancelButton.put("BgColor", "#DDC2D7");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -578,7 +578,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		if (!notavAilableTimes.contains(time)) {
     		Map<String, Object> timeButton = new HashMap<>();
     		timeButton.put("Rows", "1");
-    		timeButton.put("BgColor", "#FFBAD2");
+    		timeButton.put("BgColor", "#770B5E");
     		timeButton.put("Text", time.toString());
     		timeButton.put("TextVAlign", "middle");
     		timeButton.put("TextHAlign", "center");
@@ -597,7 +597,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> cancelButton = new HashMap<>();
     	cancelButton.put("Rows", "1");
-    	cancelButton.put("BgColor", "#ffffff");
+    	cancelButton.put("BgColor", "#DDC2D7");
     	cancelButton.put("Text", "Cancel");
     	cancelButton.put("TextVAlign", "middle");
     	cancelButton.put("TextHAlign", "center");
@@ -691,7 +691,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		Map<String, Object> button1  = new HashMap<>();
     	button1.put("Columns", "3");
     	button1.put("Rows", "2");
-    	button1.put("BgColor", "#FFBAD2");
+    	button1.put("BgColor", "#770B5E");
     	button1.put("Text", "Reserve room");
     	button1.put("TextVAlign", "middle");
     	button1.put("TextHAlign", "center");
@@ -704,7 +704,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	Map<String, Object> button2  = new HashMap<>();
     	button2.put("Columns", "3");
     	button2.put("Rows", "2");
-    	button2.put("BgColor", "#c6e2ff");
+    	button2.put("BgColor", "#BC86AF");
     	button2.put("Text", "See previous reservations");
     	button2.put("TextVAlign", "middle");
     	button2.put("TextHAlign", "center");
