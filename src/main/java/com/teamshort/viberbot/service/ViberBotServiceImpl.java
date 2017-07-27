@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -218,39 +219,74 @@ public class ViberBotServiceImpl implements ViberBotService {
 	
 		                MessageKeyboard cancelKeyboard = createCancelKeyboard();
 
-		                System.out.println("We are in try");
 	                	Map<String, Object> dateTrackingData = new HashMap<>();
 		                dateTrackingData.put("welcome", "dateObj");
 		                dateTrackingData.put("RoomID", roomIdString);
 
 		                TrackingData dateTr = new TrackingData(dateTrackingData);
-		                
-		                try{
-		                	
-			                System.out.println("We are in try");
+		  
 			                
-			                response.send(new TextMessage("Please choose date (yyyy-mm-dd):", cancelKeyboard, dateTr, new Integer(1)));
-							
-		                }
-		                catch(DateTimeParseException e){
-		                	System.out.println("We are in catch");
-		                	
-		                	response.send(new TextMessage("Incorrect date input. Please try again. Date format: (yyyy-mm-dd)", cancelKeyboard, dateTr, new Integer(1)));
-							
-		                	
-		                }
+			                
+			            response.send(new TextMessage("Please choose date (dd.MM.yyyy):", cancelKeyboard, dateTr, new Integer(1)));
+					
 		                
 		                }
 					
 				}
+					
+					
+					
+					
+					
+			//check for date parsing exception
+				else if (message.getTrackingData().get("welcome").equals("dateObj")) {
+
+					try {
+						
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+						LocalDate date = LocalDate.parse((String)message.getMapRepresentation().get("text"), formatter);
+						
+						String roomId = (String) message.getTrackingData().get("RoomID");
 			
+						System.out.println("RoomID in DATE is: " + roomId);
+			
+						
+						Map<String, Object> timeTrackingData = new HashMap<>();
+			            timeTrackingData.put("welcome", "timeObj");
+			            timeTrackingData.put("RoomID", roomId);
+			            timeTrackingData.put("Date", date.toString());
+			            
+						System.out.println("Time tracking Data HASHMAP created");
+
+
+			            TrackingData timeTr = new TrackingData(timeTrackingData);
+			                
+			            MessageKeyboard timeKeyboard = createTimeKeyboard(roomService.getRoomById(roomId), date.toString());
+					    	
+					    	
+			            System.out.println("Time keyboard created");
+
+			                
+			            response.send(new TextMessage("Please choose time:", timeKeyboard, timeTr, new Integer(1)));
 				
+
+					} catch (Exception e) {
+
+						response.send(
+								new TextMessage("Invalid format. Please enter the date again in format : dd.mm.yyyy",
+										createCancelKeyboard(), message.getTrackingData(), new Integer(1)));
+					}
+
+				}
+
+			
+				/*
 				//user enters the date
-				else if(message.getTrackingData().get("welcome").equals("dateObj")) {
+				else if(message.getTrackingData().get("welcome").equals("dateCheckedObj")) {
 					
 					String dateStr = (String) message.getMapRepresentation().get("text");
 
-					LocalDate resDate = LocalDate.parse(dateStr);
+					//LocalDate resDate = LocalDate.parse(dateStr);
 					
 					
 					//response.send("Your date is: " + resDate.toString());
@@ -279,7 +315,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		            response.send(new TextMessage("Please choose time:", timeKeyboard, timeTr, new Integer(1)));
 					
 				}
-			
+			*/
 			
 				
 				//user enters the time
