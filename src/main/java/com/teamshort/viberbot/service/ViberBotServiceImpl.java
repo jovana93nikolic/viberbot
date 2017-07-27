@@ -362,7 +362,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     		
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", buttonsList);
-    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("DefaultHeight", false);
     	keyboard.put("Type", "keyboard");
     	
     	System.out.println("RESERVATIONS keyboard successsfully created!");
@@ -422,7 +422,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", buttonsList);
-    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("DefaultHeight", false);
     	keyboard.put("Type", "keyboard");
     	
     	
@@ -466,7 +466,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 	
 	Map<String, Object> keyboard  = new HashMap<>();
 	keyboard.put("Buttons", buttonsList);
-	keyboard.put("DefaultHeight", true);
+	keyboard.put("DefaultHeight", false);
 	keyboard.put("Type", "keyboard");
 	
 	
@@ -520,7 +520,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", buttonsList);
-    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("DefaultHeight", false);
     	keyboard.put("Type", "keyboard");
     	
     	
@@ -587,7 +587,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", buttonsList);
-    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("DefaultHeight", false);
     	keyboard.put("Type", "keyboard");
     	
     	
@@ -673,7 +673,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	Map<String, Object> keyboard  = new HashMap<>();
     	keyboard.put("Buttons", button12);
-    	keyboard.put("DefaultHeight", true);
+    	keyboard.put("DefaultHeight", false);
     	keyboard.put("Type", "keyboard");
     	
     	return new MessageKeyboard(keyboard);
