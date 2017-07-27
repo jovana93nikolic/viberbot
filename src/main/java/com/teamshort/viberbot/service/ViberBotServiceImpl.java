@@ -328,10 +328,12 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     	for (Reservation res: resList){
     		
+    		String resString = res.getRoom().getName() + " " + res.getDate() + " " + res.getTime();
+    		
     		Map<String, Object> resButton = new HashMap<>();
     		resButton.put("Rows", "1");
     		resButton.put("BgColor", "#c6e2ff");
-    		resButton.put("Text", res.toString());
+    		resButton.put("Text", resString);
     		resButton.put("TextVAlign", "middle");
     		resButton.put("TextHAlign", "center");
         	resButton.put("TextOpacity", "60");
