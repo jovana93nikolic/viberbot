@@ -139,7 +139,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 						
 						
 						System.out.println("We get into reservations to cancel");
-						
+						System.out.println(message);
 						String resId = (String) message.getMapRepresentation().get("Text");
 								
 						
