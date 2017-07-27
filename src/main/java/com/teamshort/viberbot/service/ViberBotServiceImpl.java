@@ -712,7 +712,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					"Hello, " + userName + "! Welcome to ViberBot Room Reservation. Please choose one of the options below:",
 					new MessageKeyboard(welcomeKeyboard), trackingData, new Integer(1));	
 		
-		
+		//Test
 
     }
 
