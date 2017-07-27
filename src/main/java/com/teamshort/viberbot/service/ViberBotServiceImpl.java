@@ -114,8 +114,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					//user wants to previous reservations
 					else if(message.getMapRepresentation().get("text").equals("See previous reservations")){
 						System.out.println("In Previous reservations");
-						response.send("You want to see previous reservations!");
-						
+			
 					
 						Map<String, Object> reservationsTrackingData = new HashMap<>();
 				    	reservationsTrackingData.put("welcome", "reservatiosObj");
@@ -131,6 +130,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					//user chooses a reservation
 					else if(message.getTrackingData().get("welcome").equals("reservationObj")) {
+						
+						if(message.getMapRepresentation().get("Text").equals("Cancel")) {
+							 response.send(welcomeScreen(event.getSender().getName()));
+						
+						}
+						
+						else {
+						System.out.println("We get into reservations to cancel");
+						
 						String resId = (String) message.getMapRepresentation().get("Text");
 								
 						
@@ -147,7 +155,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 				    	response.send(new TextMessage("Please choose one of the options below:", cancelResKeyboard
 								, resDelTr, new Integer(1)));
 						
-						
+						}
 					}
 					
 					else if(message.getTrackingData().get("welcome").equals("resDelObj")) {
