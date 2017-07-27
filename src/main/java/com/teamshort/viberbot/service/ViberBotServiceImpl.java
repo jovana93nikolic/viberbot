@@ -117,7 +117,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 			
 					
 						Map<String, Object> reservationsTrackingData = new HashMap<>();
-				    	reservationsTrackingData.put("welcome", "reservatiosObj");
+				    	reservationsTrackingData.put("welcome", "reservationObj");
 				    	TrackingData reservationsTr = new TrackingData(reservationsTrackingData);
 				    	
 				    	MessageKeyboard reservationsKeyboard = createReservationsKeyboard(event.getSender().getId());
@@ -130,6 +130,8 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					//user chooses a reservation
 					else if(message.getTrackingData().get("welcome").equals("reservationObj")) {
+						
+						System.out.println("To cancel or not to cancel");
 						
 						if(message.getMapRepresentation().get("Text").equals("Cancel")) {
 							 response.send(welcomeScreen(event.getSender().getName()));
@@ -351,6 +353,8 @@ public class ViberBotServiceImpl implements ViberBotService {
     	keyboard.put("Buttons", buttonsList);
     	keyboard.put("DefaultHeight", true);
     	keyboard.put("Type", "keyboard");
+    	
+    	System.out.println("RESERVATIONS keyboard successsfully created!");
     	
     	
     	return new MessageKeyboard(keyboard);
