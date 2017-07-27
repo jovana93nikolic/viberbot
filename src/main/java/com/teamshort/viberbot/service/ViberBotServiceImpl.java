@@ -342,6 +342,7 @@ public class ViberBotServiceImpl implements ViberBotService {
         	
         	buttonsList.add(resButton);
         	
+        	System.out.println("Reservation id is: " +  res.getId());
     		
     	}
     	
