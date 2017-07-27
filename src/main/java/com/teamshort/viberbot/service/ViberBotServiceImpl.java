@@ -323,9 +323,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 						confTrackingData.put("RoomID", roomIdString);
 						confTrackingData.put("UserViberID", userViberId);
 
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
-						LocalDate date = LocalDate.parse(dateStr, formatter);
+						//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 						TrackingData confTr = new TrackingData(confTrackingData);
 
@@ -333,7 +331,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 						String reservationDetails = "Would you like to confirm your reservation?" + "\nROOM: "
 								+ roomService.getRoomById(roomIdString).getName() + " "
-								+ roomService.getRoomById(roomIdString).getNumber() + "\nDATE: " + date.toString()
+								+ roomService.getRoomById(roomIdString).getNumber() + "\nDATE: " + dateStr
 								+ "\nTIME: " + timeSlotString;
 
 						response.send(new TextMessage(reservationDetails, confKeyboard, confTr, new Integer(1)));
