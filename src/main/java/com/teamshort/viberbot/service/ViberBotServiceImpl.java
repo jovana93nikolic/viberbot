@@ -337,7 +337,7 @@ public class ViberBotServiceImpl implements ViberBotService {
         	resButton.put("TextOpacity", "60");
         	resButton.put("TextSize", "regular");
         	resButton.put("ActionType", "reply");
-        	resButton.put("ActionBody", res.getId());
+        	resButton.put("ActionBody", res.getId().toString());
         	resButton.put("TextSize", "regular");
         	
         	buttonsList.add(resButton);
