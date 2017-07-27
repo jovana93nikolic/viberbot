@@ -109,8 +109,6 @@ public class ViberBotServiceImpl implements ViberBotService {
 					
 					
 					
-					
-					
 					//user wants to previous reservations
 					else if(message.getMapRepresentation().get("text").equals("See previous reservations")){
 						System.out.println("In Previous reservations");
@@ -127,9 +125,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 								, reservationsTr, new Integer(1)));
 					
 					}
+				}
 					
 					//user chooses a reservation
-					else if(message.getTrackingData().get("welcome").equals("reservationObj")) {
+					if(message.getTrackingData().get("welcome").equals("reservationObj")) {
 						
 						System.out.println("To cancel or not to cancel");
 						
@@ -175,7 +174,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					}
 					
 					
-				}
+				
 				
 				
 				//from get available rooms to enter date
