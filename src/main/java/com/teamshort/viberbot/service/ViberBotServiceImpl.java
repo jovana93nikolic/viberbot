@@ -160,6 +160,11 @@ public class ViberBotServiceImpl implements ViberBotService {
 					}
 					
 					else if(message.getTrackingData().get("welcome").equals("resDelObj")) {
+						
+						System.out.println("In RESDELOBJ text is " + message.getMapRepresentation().get("Text"));
+						System.out.println("In RESDELOBJ resID is " + message.getTrackingData().get("resId"));
+											
+						
 						if(message.getMapRepresentation().get("Text").equals("Cancel Reservation")) {
 							reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
 							response.send(new TextMessage("You have canceled your reservation!"));
@@ -172,6 +177,9 @@ public class ViberBotServiceImpl implements ViberBotService {
 						}
 					
 					}
+					
+					
+					
 					
 					
 				
