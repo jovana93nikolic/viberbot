@@ -177,20 +177,34 @@ public class ViberBotServiceImpl implements ViberBotService {
 						
 						System.out.println("In RESDELOBJ text is " + message.getMapRepresentation().get("Text"));
 						System.out.println("In RESDELOBJ resID is " + message.getTrackingData().get("resId"));
-											
-						
+					
 						if(message.getMapRepresentation().get("text").equals("CancelReservation")) {
-							reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
-							response.send(new TextMessage("You have canceled your reservation!"));
-							response.send(welcomeScreen(event.getSender().getName()));
+							//reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
+							
+							
+							MessageKeyboard confCancelKeyboard = createConfirmKeyboard();
+
+		                	Map<String, Object> confCancelTrackingData = new HashMap<>();
+		                	confCancelTrackingData.put("welcome", "cancelObj");
+		                	confCancelTrackingData.put("resID", message.getTrackingData().get("resId"));
+
+			                TrackingData confCancelTr = new TrackingData(confCancelTrackingData);
+				  
+			                response.send(new TextMessage("Are you sure you want to cancel your reservation?", confCancelKeyboard, confCancelTr, new Integer(1)));
+							
 							
 						}
-						else if(message.getMapRepresentation().get("text").equals("Cancel")) {
-							 response.send(welcomeScreen(event.getSender().getName()));
 						
-						}
-					
 					}
+					
+					else if(message.getTrackingData().get("welcome").equals("cancelObj")) {
+						
+						reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resID")));
+						response.send("You have successfully deleted your reservation!");
+						
+					}
+					
+					
 					
 					
 					
