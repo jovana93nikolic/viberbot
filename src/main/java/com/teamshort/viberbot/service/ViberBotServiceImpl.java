@@ -86,6 +86,15 @@ public class ViberBotServiceImpl implements ViberBotService {
 				
 				System.out.println(message.getMapRepresentation().get("text"));
 				
+				
+				 if(message.getMapRepresentation().get("text").equals("Cancel")){
+					 System.out.println("In Cancel");   
+					 response.send(welcomeScreen(event.getSender().getName()));
+				
+					 
+	                    }
+				
+				
 				//reserve or show reservations 
 				if(message.getTrackingData().get("welcome").equals("welcomeObj")){
 					System.out.println("In Welcome");
@@ -212,11 +221,24 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                dateTrackingData.put("RoomID", roomIdString);
 
 		                TrackingData dateTr = new TrackingData(dateTrackingData);
-		               
-
 		                
-		                response.send(new TextMessage("Please choose date (yyyy-mm-dd):", null, dateTr, new Integer(1)));
-					}
+		                MessageKeyboard cancelKeyboard = createCancelKeyboard();
+		                
+		                
+		                try{
+		                	System.out.println("We are in try");
+
+			                response.send(new TextMessage("Please choose date (yyyy-mm-dd):", cancelKeyboard, dateTr, new Integer(1)));
+							
+		                }
+		                catch(Exception e){
+		                	System.out.println("We are in catch");
+		                	response.send(new TextMessage("Incorrect date input. Please try again. Date format: (yyyy-mm-dd)", cancelKeyboard, dateTr, new Integer(1)));
+							
+		                	
+		                }
+		                
+		                }
 					
 				}
 			
@@ -530,6 +552,7 @@ public class ViberBotServiceImpl implements ViberBotService {
     
     
     }
+    
     private MessageKeyboard createTimeKeyboard(Room room, String date) {
     	
     	System.out.println("IN createTimeKeyboard, room  " + room.getId() + " date: " + date);
@@ -597,7 +620,32 @@ public class ViberBotServiceImpl implements ViberBotService {
     	
     }
     
-    
+    private MessageKeyboard createCancelKeyboard() {
+    	
+	    ArrayList<Map> buttonsList  = new ArrayList<>();
+	    	
+	    Map<String, Object> cancelButton = new HashMap<>();
+		cancelButton.put("Rows", "1");
+		cancelButton.put("BgColor", "#ffffff");
+		cancelButton.put("Text", "Cancel");
+		cancelButton.put("TextVAlign", "middle");
+		cancelButton.put("TextHAlign", "center");
+		cancelButton.put("TextOpacity", "60");
+		cancelButton.put("TextSize", "regular");
+		cancelButton.put("ActionType", "reply");
+		cancelButton.put("ActionBody", "Cancel");
+		cancelButton.put("TextSize", "regular");
+		
+		buttonsList.add(cancelButton);
+			
+		Map<String, Object> keyboard  = new HashMap<>();
+		keyboard.put("Buttons", buttonsList);
+		keyboard.put("DefaultHeight", false);
+		keyboard.put("Type", "keyboard");
+	    
+	    return new MessageKeyboard(keyboard);
+	
+    }
 	@Override
 	public void subscribe(ViberBot bot) {
 
