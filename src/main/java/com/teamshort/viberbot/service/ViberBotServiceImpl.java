@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -215,24 +216,25 @@ public class ViberBotServiceImpl implements ViberBotService {
 		                	
 		                System.out.println("Room is" + roomIdString);
 	
+		                MessageKeyboard cancelKeyboard = createCancelKeyboard();
 
-		                Map<String, Object> dateTrackingData = new HashMap<>();
+		                System.out.println("We are in try");
+	                	Map<String, Object> dateTrackingData = new HashMap<>();
 		                dateTrackingData.put("welcome", "dateObj");
 		                dateTrackingData.put("RoomID", roomIdString);
 
 		                TrackingData dateTr = new TrackingData(dateTrackingData);
 		                
-		                MessageKeyboard cancelKeyboard = createCancelKeyboard();
-		                
-		                
 		                try{
-		                	System.out.println("We are in try");
-
+		                	
+			                System.out.println("We are in try");
+			                
 			                response.send(new TextMessage("Please choose date (yyyy-mm-dd):", cancelKeyboard, dateTr, new Integer(1)));
 							
 		                }
-		                catch(Exception e){
+		                catch(DateTimeParseException e){
 		                	System.out.println("We are in catch");
+		                	
 		                	response.send(new TextMessage("Incorrect date input. Please try again. Date format: (yyyy-mm-dd)", cancelKeyboard, dateTr, new Integer(1)));
 							
 		                	
