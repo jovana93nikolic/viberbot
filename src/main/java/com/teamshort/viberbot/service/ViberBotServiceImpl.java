@@ -262,48 +262,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 					}
 				}
 
-				/*
-				 * //user enters the date else
-				 * if(message.getTrackingData().get("welcome").equals(
-				 * "dateCheckedObj")) {
-				 * 
-				 * String dateStr = (String)
-				 * message.getMapRepresentation().get("text");
-				 * 
-				 * //LocalDate resDate = LocalDate.parse(dateStr);
-				 * 
-				 * 
-				 * //response.send("Your date is: " + resDate.toString());
-				 * 
-				 * String roomId = (String)
-				 * message.getTrackingData().get("RoomID");
-				 * 
-				 * System.out.println("RoomID in DATE is: " + roomId);
-				 * 
-				 * 
-				 * Map<String, Object> timeTrackingData = new HashMap<>();
-				 * timeTrackingData.put("welcome", "timeObj");
-				 * timeTrackingData.put("RoomID", roomId);
-				 * timeTrackingData.put("Date", dateStr);
-				 * 
-				 * System.out.println("Time tracking Data HASHMAP created");
-				 * 
-				 * 
-				 * TrackingData timeTr = new TrackingData(timeTrackingData);
-				 * 
-				 * MessageKeyboard timeKeyboard =
-				 * createTimeKeyboard(roomService.getRoomById(roomId), dateStr);
-				 * 
-				 * 
-				 * System.out.println("Time keyboard created");
-				 * 
-				 * 
-				 * response.send(new TextMessage("Please choose time:",
-				 * timeKeyboard, timeTr, new Integer(1)));
-				 * 
-				 * }
-				 */
-
+				
 				// user enters the time
 				else if (message.getTrackingData().get("welcome").equals("timeObj")) {
 					if (message.getMapRepresentation().get("text").equals("Cancel")) {
@@ -371,7 +330,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 
 			Map<String, Object> resButton = new HashMap<>();
 			resButton.put("Rows", "1");
-			resButton.put("BgColor", "#BC86AF");
+			resButton.put("BgColor", "#770B5E");
 			resButton.put("Text", "<font color=\"#ffffff\">" + resString + "</font>");
 			resButton.put("TextVAlign", "middle");
 			resButton.put("TextHAlign", "center");
@@ -690,7 +649,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		Map<String, Object> button2 = new HashMap<>();
 		button2.put("Columns", "3");
 		button2.put("Rows", "2");
-		button2.put("BgColor", "#BC86AF");
+		button2.put("BgColor", "#770B5E");
 		button2.put("Text", "<font color=\"#ffffff\">See previous reservations</font>");
 		button2.put("TextVAlign", "middle");
 		button2.put("TextHAlign", "center");
