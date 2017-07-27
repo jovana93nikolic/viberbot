@@ -141,16 +141,21 @@ public class ViberBotServiceImpl implements ViberBotService {
 				    	
 				    	MessageKeyboard cancelResKeyboard = cancelResKeyboard();
 				    	
+				    	System.out.println("IN USER CHOOSING A RESERVATION");
+				    	
+				    	
 				    	response.send(new TextMessage("Please choose one of the options below:", cancelResKeyboard
 								, resDelTr, new Integer(1)));
 						
 						
 					}
 					
-					else if(message.getTrackingData().get("welcome").equals("reservationObj")) {
+					else if(message.getTrackingData().get("welcome").equals("resDelObj")) {
 						if(message.getMapRepresentation().get("Text").equals("Cancel reservation")) {
 							reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
 							response.send(new TextMessage("You have canceled your reservation!"));
+							response.send(welcomeScreen(event.getSender().getName()));
+							
 						}
 						else if(message.getMapRepresentation().get("Text").equals("Cancel")) {
 							 response.send(welcomeScreen(event.getSender().getName()));
@@ -247,8 +252,6 @@ public class ViberBotServiceImpl implements ViberBotService {
 						 String userViberId = event.getSender().getId();
 						 String dateStr = (String) message.getTrackingData().get("Date");
 						 
-						 System.out.println("time: " + timeSlotString + "roomId: " + roomIdString + "user: " + userViberId);
-						 
 						 Map<String, Object> confTrackingData = new HashMap<>();
 				         confTrackingData.put("welcome", "confObj");
 				         confTrackingData.put("Time", timeSlotString);
@@ -262,14 +265,23 @@ public class ViberBotServiceImpl implements ViberBotService {
 				            MessageKeyboard confKeyboard = createConfirmKeyboard();
 						    	
 						 
+				            
+							 String reservationDetails = "Would you like to confirm your reservation?"
+							 		+ "\nROOM: " + roomService.getRoomById(roomIdString).getName() + " " + roomService.getRoomById(roomIdString).getNumber()
+							 		+ "\nDATE: " + dateStr
+							 		+ "\nTIME: " + timeSlotString;
+				            
+				            
 						 
-						 response.send(new TextMessage("Do you wish to confirm reservation?", confKeyboard, confTr, new Integer(1)));
+						 response.send(new TextMessage(reservationDetails, confKeyboard, confTr, new Integer(1)));
 						 
 					 }
 
 				}
-					//user enters the time
+					//user confirmed the reservation
 						else if(message.getTrackingData().get("welcome").equals("confObj")) {
+							
+							
 							
 							TrackingData data = message.getTrackingData();
 							
