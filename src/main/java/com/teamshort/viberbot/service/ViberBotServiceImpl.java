@@ -132,10 +132,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 						
 						System.out.println("To cancel or not to cancel");
 						
-						//if(message.getMapRepresentation().get("Text").equals("Cancel")) {
-						//	 response.send(welcomeScreen(event.getSender().getName()));
+						if(message.getMapRepresentation().get("Text").equals("Cancel")) {
+							 response.send(welcomeScreen(event.getSender().getName()));
 						
-						//}
+						}
 						
 						
 						System.out.println("We get into reservations to cancel");
@@ -150,7 +150,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 				    	
 				    	MessageKeyboard cancelResKeyboard = cancelResKeyboard();
 				    	
-				    	System.out.println("IN USER CHOOSING A RESERVATION");
+				    	System.out.println("IN USER CHOOSING A RESERVATION, resID" + resId );
+				    	
+				    	
+				    	
 				    	
 				    	
 				    	response.send(new TextMessage("Please choose one of the options below:", cancelResKeyboard
@@ -165,7 +168,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 						System.out.println("In RESDELOBJ resID is " + message.getTrackingData().get("resId"));
 											
 						
-						if(message.getMapRepresentation().get("Text").equals("Cancel Reservation")) {
+						if(message.getMapRepresentation().get("Text").equals("CancelReservation")) {
 							reservationService.delete(Long.parseLong((String)message.getTrackingData().get("resId")));
 							response.send(new TextMessage("You have canceled your reservation!"));
 							response.send(welcomeScreen(event.getSender().getName()));
@@ -440,7 +443,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelRes.put("TextOpacity", "60");
 		cancelRes.put("TextSize", "regular");
 		cancelRes.put("ActionType", "reply");
-		cancelRes.put("ActionBody", "Cancel Reservation");
+		cancelRes.put("ActionBody", "CancelReservation");
 		cancelRes.put("TextSize", "regular");
     	
     	buttonsList.add(cancelRes);
