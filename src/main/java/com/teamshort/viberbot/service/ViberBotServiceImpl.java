@@ -374,10 +374,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 			Map<String, Object> resButton = new HashMap<>();
 			resButton.put("Rows", "1");
 			resButton.put("BgColor", "#BC86AF");
-			resButton.put("Text", "<font color=\"#ffffff\">resString</font>");
+			resButton.put("Text", "<font color=\"#ffffff\">" + resString + "</font>");
 			resButton.put("TextVAlign", "middle");
 			resButton.put("TextHAlign", "center");
-			resButton.put("TextOpacity", "60");
+			resButton.put("TextOpacity", "80");
 			resButton.put("TextSize", "regular");
 			resButton.put("ActionType", "reply");
 			resButton.put("ActionBody", res.getId().toString());
@@ -395,7 +395,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelButton.put("Text", "<font color=\"#ffffff\">Cancel</font>");
 		cancelButton.put("TextVAlign", "middle");
 		cancelButton.put("TextHAlign", "center");
-		cancelButton.put("TextOpacity", "60");
+		cancelButton.put("TextOpacity", "100");
 		cancelButton.put("TextSize", "regular");
 		cancelButton.put("ActionType", "reply");
 		cancelButton.put("ActionBody", "Cancel");
@@ -425,10 +425,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 			Map<String, Object> roomButton = new HashMap<>();
 			roomButton.put("Rows", "1");
 			roomButton.put("BgColor", "#770B5E");
-			roomButton.put("Text", "<font color=\"#ffffff\">room.getName() + \" \" + room.getNumber()</font>");
+			roomButton.put("Text", "<font color=\"#ffffff\">" + room.getName() + " " + room.getNumber() + "</font>");
 			roomButton.put("TextVAlign", "middle");
 			roomButton.put("TextHAlign", "center");
-			roomButton.put("TextOpacity", "60");
+			roomButton.put("TextOpacity", "80");
 			roomButton.put("TextSize", "regular");
 			roomButton.put("ActionType", "reply");
 			roomButton.put("ActionBody", room.getId());
@@ -444,7 +444,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelButton.put("Text", "<font color=\"#ffffff\">Cancel</font>");
 		cancelButton.put("TextVAlign", "middle");
 		cancelButton.put("TextHAlign", "center");
-		cancelButton.put("TextOpacity", "60");
+		cancelButton.put("TextOpacity", "100");
 		cancelButton.put("TextSize", "regular");
 		cancelButton.put("ActionType", "reply");
 		cancelButton.put("ActionBody", "Cancel");
@@ -471,7 +471,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelRes.put("Text", "<font color=\"#ffffff\">Cancel Reservation</font>");
 		cancelRes.put("TextVAlign", "middle");
 		cancelRes.put("TextHAlign", "center");
-		cancelRes.put("TextOpacity", "60");
+		cancelRes.put("TextOpacity", "80");
 		cancelRes.put("TextSize", "regular");
 		cancelRes.put("ActionType", "reply");
 		cancelRes.put("ActionBody", "CancelReservation");
@@ -485,7 +485,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelButton.put("Text", "<font color=\"#ffffff\">Cancel</font>");
 		cancelButton.put("TextVAlign", "middle");
 		cancelButton.put("TextHAlign", "center");
-		cancelButton.put("TextOpacity", "60");
+		cancelButton.put("TextOpacity", "100");
 		cancelButton.put("TextSize", "regular");
 		cancelButton.put("ActionType", "reply");
 		cancelButton.put("ActionBody", "Cancel");
@@ -512,7 +512,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		confButton.put("Text", "<font color=\"#ffffff\">Confirm</font>");
 		confButton.put("TextVAlign", "middle");
 		confButton.put("TextHAlign", "center");
-		confButton.put("TextOpacity", "60");
+		confButton.put("TextOpacity", "80");
 		confButton.put("TextSize", "regular");
 		confButton.put("ActionType", "reply");
 		confButton.put("ActionBody", "Confirm");
@@ -526,7 +526,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelButton.put("Text", "<font color=\"#ffffff\">Cancel</font>");
 		cancelButton.put("TextVAlign", "middle");
 		cancelButton.put("TextHAlign", "center");
-		cancelButton.put("TextOpacity", "60");
+		cancelButton.put("TextOpacity", "100");
 		cancelButton.put("TextSize", "regular");
 		cancelButton.put("ActionType", "reply");
 		cancelButton.put("ActionBody", "Cancel");
@@ -570,10 +570,10 @@ public class ViberBotServiceImpl implements ViberBotService {
 				Map<String, Object> timeButton = new HashMap<>();
 				timeButton.put("Rows", "1");
 				timeButton.put("BgColor", "#770B5E");
-				timeButton.put("Text", "<font color=\"#ffffff\">time.toString()</font>");
+				timeButton.put("Text", "<font color=\"#ffffff\">"+time.toString()+"</font>");
 				timeButton.put("TextVAlign", "middle");
 				timeButton.put("TextHAlign", "center");
-				timeButton.put("TextOpacity", "60");
+				timeButton.put("TextOpacity", "80");
 				timeButton.put("TextSize", "regular");
 				timeButton.put("ActionType", "reply");
 				timeButton.put("ActionBody", time.toString());
@@ -591,7 +591,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelButton.put("Text", "<font color=\"#ffffff\">Cancel</font>");
 		cancelButton.put("TextVAlign", "middle");
 		cancelButton.put("TextHAlign", "center");
-		cancelButton.put("TextOpacity", "60");
+		cancelButton.put("TextOpacity", "100");
 		cancelButton.put("TextSize", "regular");
 		cancelButton.put("ActionType", "reply");
 		cancelButton.put("ActionBody", "Cancel");
@@ -618,7 +618,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		cancelButton.put("Text", "<font color=\"#ffffff\">Cancel</font>");
 		cancelButton.put("TextVAlign", "middle");
 		cancelButton.put("TextHAlign", "center");
-		cancelButton.put("TextOpacity", "60");
+		cancelButton.put("TextOpacity", "100");
 		cancelButton.put("TextSize", "regular");
 		cancelButton.put("ActionType", "reply");
 		cancelButton.put("ActionBody", "Cancel");
@@ -683,7 +683,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		button1.put("Text", "<font color=\"#ffffff\">Reserve room</font>");
 		button1.put("TextVAlign", "middle");
 		button1.put("TextHAlign", "center");
-		button1.put("TextOpacity", "60");
+		button1.put("TextOpacity", "80");
 		button1.put("TextSize", "regular");
 		button1.put("ActionType", "reply");
 		button1.put("ActionBody", "Reserve room");
@@ -696,7 +696,7 @@ public class ViberBotServiceImpl implements ViberBotService {
 		button2.put("Text", "<font color=\"#ffffff\">See previous reservations</font>");
 		button2.put("TextVAlign", "middle");
 		button2.put("TextHAlign", "center");
-		button2.put("TextOpacity", "60");
+		button2.put("TextOpacity", "80");
 		button2.put("TextSize", "regular");
 		button2.put("ActionType", "reply");
 		button2.put("ActionBody", "See previous reservations");
